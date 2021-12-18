@@ -5,17 +5,17 @@ https://git.backbone.ws/NSPCH/nspchTelegramBots
 SSH: tbot@backbone.ws
 
 --- Боты ---
-@nspchSecurityBot 5032380693:
-  1. Размещает раз в полчаса пост "Пройти собеседование" с отсылкой на @nspchInterviewBot.
+@nspchSecurityBot https://t.me/nspchSecurityBot 5032380693:
+  1. Размещает раз в полчаса (или по входу новичка) пост "Пройти собеседование" с отсылкой на @nspchInterviewBot.
   2. Удаляет засидевшихся новичков.
-@nspchInterviewBot 5078871186 - провдит интервью, отправляет в один из ЧНВ (*).
-@nspchFaqBot 5082999852 - отвечает на вопросы, даёт справочную информацию непосредственно в чате ЧНВ(*).
+@nspchInterviewBot https://t.me/nspchInterviewBot 5078871186 - провдит интервью, отправляет в один из ЧНВ (*).
+@nspchFaqBot https://t.me/nspchFaqBot 5082999852 - отвечает на вопросы, даёт справочную информацию непосредственно в чате ЧНВ(*).
 
 --- Тестовые группы ---
-нунциат (BotTest) -638954312
-(I) Ч=Н=В=К (BotTest) -715891458
-(II) Ч=Н=В=К (BotTest) -751516454
-(III) Ч=Н=В=К (BotTest) -708657566
-(I) cmapman (BotTest) -669255840
-(II) cmapman (BotTest) -753833878
-(III) cmapman (BotTest) -759563358
+нунциат (BotTest) https://t.me/+Sflum2G7ecY0YzNi -638954312
+(I) Ч=Н=В=К (BotTest) https://t.me/+-_ApL8ELp_IyOTI6 -715891458
+(II) Ч=Н=В=К (BotTest) https://t.me/+bHeRzW3Vq7cwMjY6 -751516454
+(III) Ч=Н=В=К (BotTest) https://t.me/+kmy4hn5jDmpmYTAy -708657566
+(I) cmapman (BotTest) https://t.me/+I3bTUR-t_IAwMDdi -669255840
+(II) cmapman (BotTest) https://t.me/+pDoB-1tuAM4xZDBi -753833878
+(III) cmapman (BotTest) https://t.me/+aMzoHEoJM5w5NWVi -759563358
