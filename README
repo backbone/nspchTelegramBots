@@ -8,7 +8,7 @@ SSH: tbot@backbone.ws
 @nspchSecurityBot https://t.me/nspchSecurityBot 5032380693:
   1. Размещает раз в полчаса (или по входу новичка) пост "Пройти собеседование" с отсылкой на @nspchInterviewBot.
   2. Удаляет засидевшихся новичков.
-@nspchInterviewBot https://t.me/nspchInterviewBot 5078871186 - провдит интервью, отправляет в один из ЧНВ (*).
+@nspchInterviewBot https://t.me/nspchInterviewBot 5078871186 - проводит интервью, отправляет в один из ЧНВ (*).
 @nspchFaqBot https://t.me/nspchFaqBot 5082999852 - отвечает на вопросы, даёт справочную информацию непосредственно в чате ЧНВ(*).
 
 --- Тестовые группы ---
