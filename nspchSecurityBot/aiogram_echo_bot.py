@@ -25,20 +25,21 @@ async def send_welcome(message: types.Message):
     await message.reply("Hi!\nI'm EchoBot!\nPowered by aiogram.")
 
 
-@dp.message_handler(regexp='(^cat[s]?$|puss)')
-async def cats(message: types.Message):
-    with open('data/cats.jpg', 'rb') as photo:
+#@dp.message_handler(regexp='(^cat[s]?$|puss)')
+@dp.message_handler(regexp='(вступ|join|присоед|приглаш)')
+async def show_interview(message: types.Message):
+    with open('data/Interview-1.webp', 'rb') as photo:
         '''
         # Old fashioned way:
         await bot.send_photo(
             message.chat.id,
             photo,
-            caption='Cats are here 😺',
+            caption='СОБЕСЕДОВАНИЕ',
             reply_to_message_id=message.message_id,
         )
         '''
 
-        await message.reply_photo(photo, caption='Cats are here 😺')
+        await message.reply_photo(photo, caption='Пройти собеседование -> @nspchInterviewBot')
 
 
 @dp.message_handler()
