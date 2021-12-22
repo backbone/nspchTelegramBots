@@ -28,6 +28,9 @@ async def send_welcome(message: types.Message):
 #@dp.message_handler(regexp='(^cat[s]?$|puss)')
 @dp.message_handler(regexp='(вступ|join|присоед|приглаш)')
 async def show_interview(message: types.Message):
+    keyboard = types.InlineKeyboardMarkup()
+    button = types.InlineKeyboardButton('Пройти собеседование', url='https://t.me/nspchInterviewBot')
+    keyboard.add(button)
     with open('data/Interview-1.webp', 'rb') as photo:
         '''
         # Old fashioned way:
@@ -39,7 +42,7 @@ async def show_interview(message: types.Message):
         )
         '''
 
-        await message.reply_photo(photo, caption='Пройти собеседование -> @nspchInterviewBot')
+        await message.reply_photo(photo, caption='', reply_markup=keyboard)
 
 
 @dp.message_handler()
