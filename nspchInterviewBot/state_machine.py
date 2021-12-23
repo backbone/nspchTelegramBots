@@ -30,6 +30,10 @@ class Form(StatesGroup):
 
 @dp.message_handler(commands='start')
 async def cmd_start(message: types.Message):
+
+    await bot.send_video(message.chat.id, open('data/Greeting.mp4', 'rb'))
+
+
     """
     Conversation's entry point
     """
