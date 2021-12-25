@@ -8,6 +8,7 @@ from aiogram.dispatcher.filters import Text
 from aiogram.dispatcher.filters.state import State, StatesGroup
 from aiogram.types import ParseMode
 from aiogram.utils import executor
+import random
 
 logging.basicConfig(level=logging.INFO)
 
@@ -31,10 +32,8 @@ class Form(StatesGroup):
 @dp.message_handler(commands='start')
 async def cmd_start(message: types.Message):
 
-    await bot.send_video(message.chat.id, open('data/Greeting/Greeting-0.mp4', 'rb'))
-    await bot.send_video(message.chat.id, open('data/Greeting/Greeting-1.mp4', 'rb'))
-    await bot.send_video(message.chat.id, open('data/Greeting/Greeting-2.mp4', 'rb'))
-    await bot.send_video(message.chat.id, open('data/Greeting/Greeting-3.mp4', 'rb'))
+    video_path = 'data/Greeting/Greeting-'+str(random.randint(0,3))+'.mp4'
+    await bot.send_video(message.chat.id, open(video_path, 'rb'))
 
 
     """
