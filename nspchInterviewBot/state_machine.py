@@ -31,7 +31,10 @@ class Form(StatesGroup):
 @dp.message_handler(commands='start')
 async def cmd_start(message: types.Message):
 
-    await bot.send_video(message.chat.id, open('data/Greeting.mp4', 'rb'))
+    await bot.send_video(message.chat.id, open('data/Greeting/Greeting-0.mp4', 'rb'))
+    await bot.send_video(message.chat.id, open('data/Greeting/Greeting-1.mp4', 'rb'))
+    await bot.send_video(message.chat.id, open('data/Greeting/Greeting-2.mp4', 'rb'))
+    await bot.send_video(message.chat.id, open('data/Greeting/Greeting-3.mp4', 'rb'))
 
 
     """
