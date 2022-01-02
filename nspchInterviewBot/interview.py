@@ -49,26 +49,8 @@ class Form(StatesGroup):
 
 @dp.message_handler(commands='start')
 async def cmd_start(message: types.Message):
-
-    #await message.reply("Рады поприветствовать в ПрофСоюзе Правозащитников \
-            #        без границ!\nПрофсоюз является экстерриториальным работодателем \
-            #с профсоюзным взносом в размере 0.34% от ЗП.")
-
-
-    #video_path = 'data/Greeting/Greeting-'+str(random.randint(0,3))+'.mp4'
-    #await bot.send_video(message.chat.id, open(video_path, 'rb'),
-    #                     caption="Просмотрите ознакомительную видеопрезентацию.")
-
-
-    #"""
-    #Conversation's entry point
-    #"""
-    ## Set state
     await Form.stateBegin.set()
     await process_begin(message)
-
-    #await message.reply("Hi there! What's your name?")
-
 
 # You can use state '*' if you need to handle all states
 @dp.message_handler(state='*', commands='cancel')
