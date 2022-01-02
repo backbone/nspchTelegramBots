@@ -24,9 +24,27 @@ dp = Dispatcher(bot, storage=storage)
 
 # States
 class Form(StatesGroup):
-    name = State()  # Will be represented in storage as 'Form:name'
-    age = State()  # Will be represented in storage as 'Form:age'
-    gender = State()  # Will be represented in storage as 'Form:gender'
+    stateBegin = State()
+    stateClosedNumber = State()
+    stateSocialNetworkQ = State()
+    stateTikTokCodeQ = State()
+    stateStreamerQ = State()
+    stateViewersQ = State()
+    stateStreamTimeQ = State()
+    stateStreamerTeamQ = State()
+    stateMutualSubscriptionsQ = State()
+    statePusherTeamQ = State()
+    stateWantTikTokQ = State()
+    stateTikTokAgeQ = State()
+    stateTikTokScreenshotQ = State()
+    stateReadyToWorkQ = State()
+    stateWorkerAgeQ = State()
+    stateTimeZoneQ = State()
+    stateProfessionQ = State()
+    stateExpectedSalaryQ = State()
+    stateExpectedWorkHoursQ = State()
+    stateIURSSContribution = State()
+    stateEnd = State()
 
 
 @dp.message_handler(commands='start')
