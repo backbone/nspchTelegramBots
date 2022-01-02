@@ -69,23 +69,35 @@ async def cancel_handler(message: types.Message, state: FSMContext):
     # And remove keyboard (just in case)
     await message.reply('Cancelled.', reply_markup=types.ReplyKeyboardRemove())
 
+def get_voice(s="001"):
+    return 'data/voice/chnv-001/'+str(datetime.datetime.now().hour+1)+'/'+s+'.mp3'
+
 @dp.message_handler(state=Form.stateBegin)
 async def process_begin(message: types.Message):
-    audio_path = 'data/voice/chnv-001/'+str(datetime.datetime.now().hour+1)+'/001.mp3'
-    await bot.send_voice(message.chat.id, open(audio_path, 'rb'),
+    await bot.send_voice(message.chat.id, open(get_voice('001'), 'rb'),
                          caption="Рады поприветствовать в ПрофСоюзе Правозащитников \
 без границ!\nПрофсоюз является экстерриториальным работодателем с профсоюзным взносом \
 в размере 0.34% от ЗП.")
 
-    #await message.reply("Рады поприветствовать в ПрофСоюзе Правозащитников \
-    #        без границ!\nПрофсоюз является экстерриториальным работодателем \
-    #        с профсоюзным взносом в размере 0.34% от ЗП.")
-
-
     video_path = 'data/Greeting/Greeting-'+str(random.randint(0,3))+'.mp4'
     await bot.send_video(message.chat.id, open(video_path, 'rb'),
                          caption="Просмотрите ознакомительную видеопрезентацию.")
-    Form.next()
+    await Form.next()
+
+# TODO: G O D  E Y E ===
+@dp.message_handler(state=Form.stateClosedNumber)
+async def process_closed_number(message: types.Message):
+    audio_path = 'data/voice/chnv-001/'+str(datetime.datetime.now().hour+1)+'/004.mp3'
+    await message.reply("Глаз Бога пока не работает (не вижу, открыт ли номер)...")
+    await Form.stateSocialNetworkQ.set()
+    await process_social_network_q(message)
+
+@dp.message_handler(state=Form.stateSocialNetworkQ)
+async def process_social_network_q(message: types.Message):
+    print(get_voice('004'))
+    await bot.send_voice(message.chat.id, open(get_voice('004'), 'rb'),
+                         caption="Где вы получили информацию о нас?")
+
 
 #@dp.message_handler(state=Form.name)
 #async def process_name(message: types.Message, state: FSMContext):
