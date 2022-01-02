@@ -89,29 +89,31 @@ def get_voice(s="001"):
 async def check_reset(message):
     if message.text == reset_button_text:
         await Form.stateBegin.set()
-        process_begin(message)
+        await cmd_start(message)
         return True
     return False
-
-@dp.message_handler(state=Form.stateBegin)
-async def process_begin(message: types.Message):
-    await check_reset(message)
-    if message.text == "Я просмотрел презентацию":
-        markup = types.ReplyKeyboardRemove()
-        await process_closed_number(message)
-        await bot.send_voice(message.chat.id, open(get_voice('004'), 'rb'),
-                             caption="Где вы получили информацию о нас?")
-        await Form.stateSocialNetworkQ.set()
 
 @dp.message_handler(lambda message: message.text not in [
     "Я просмотрел презентацию", reset_button_text], state=Form.stateBegin)
 async def process_begin_invalid(message: types.Message):
     return await message.reply("Выберите вариант с экранной клавиатуры.")
 
+@dp.message_handler(state=Form.stateBegin)
+async def process_begin(message: types.Message):
+    await check_reset(message)
+    if message.text == "Я просмотрел презентацию":
+        markup = types.ReplyKeyboardRemove()
+        #await process_closed_number(message)
+        await bot.send_voice(message.chat.id, open(get_voice('004'), 'rb'),
+                             caption="Где вы получили информацию о нас?",
+                             reply_markup=markup)
+        await Form.stateSocialNetworkQ.set()
+
 # TODO: G O D  E Y E ===
-@dp.message_handler(state=Form.stateClosedNumber)
-async def process_closed_number(message: types.Message):
-    await message.reply("Глаз Бога пока не работает (не вижу, открыт ли номер)...")
+#@dp.message_handler(state=Form.stateClosedNumber)
+#async def process_closed_number(message: types.Message):
+#    if check_reset(message): return
+#    await message.reply("Глаз Бога пока не работает (не вижу, открыт ли номер)...")
 
 #@dp.message_handler(state=Form.stateSocialNetworkQ)
 #async def process_social_network_q(message: types.Message):
