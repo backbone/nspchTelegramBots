@@ -122,7 +122,11 @@ async def cmd_start(message: types.Message):
     await Form.stateBegin.set()
 
 def get_voice(s="001"):
-    return 'data/voice/chnv-001/'+str(datetime.datetime.now().hour+1)+'/'+s+'.mp3'
+    h=datetime.datetime.now().hour+1
+    hs=str(h)
+    if h < 10:
+        hs='0'+hs
+    return 'data/voice/chnv-001/'+hs+'/'+s+'.mp3'
 
 async def check_reset(message):
     if message.text == Answers.back_to_gegin_answ:
@@ -151,8 +155,8 @@ async def process_begin(message: types.Message):
 #    if check_reset(message): return
 #    await message.reply("Глаз Бога пока не работает (не вижу, открыт ли номер)...")
 
-@dp.message_handler(state=Form.stateSocialNetworkQ)
-async def process_social_network_q(message: types.Message):
+#@dp.message_handler(state=Form.stateSocialNetworkQ)
+#async def process_social_network_q(message: types.Message):
 
 #------------------------------------------------------------------------------
 if __name__ == '__main__':
