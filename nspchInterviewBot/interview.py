@@ -90,8 +90,6 @@ async def check_reset(message):
     if message.text == reset_button_text:
         await Form.stateBegin.set()
         await cmd_start(message)
-        return True
-    return False
 
 @dp.message_handler(lambda message: message.text not in [
     "Я просмотрел презентацию", reset_button_text], state=Form.stateBegin)
