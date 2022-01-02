@@ -86,6 +86,17 @@ async def cancel_handler(message: types.Message, state: FSMContext):
     # And remove keyboard (just in case)
     await message.reply('Cancelled.', reply_markup=types.ReplyKeyboardRemove())
 
+@dp.message_handler(state=Form.stateBegin)
+
+    #await message.reply("Рады поприветствовать в ПрофСоюзе Правозащитников \
+    #        без границ!\nПрофсоюз является экстерриториальным работодателем \
+    #        с профсоюзным взносом в размере 0.34% от ЗП.")
+
+
+    video_path = 'data/Greeting/Greeting-'+str(random.randint(0,3))+'.mp4'
+    await bot.send_video(message.chat.id, open(video_path, 'rb'),
+                         caption="Просмотрите ознакомительную видеопрезентацию.")
+    Form.next()
 
 @dp.message_handler(state=Form.name)
 async def process_name(message: types.Message, state: FSMContext):
