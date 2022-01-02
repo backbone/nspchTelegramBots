@@ -20,7 +20,6 @@ bot = Bot(token=API_TOKEN)
 # For example use simple MemoryStorage for Dispatcher.
 storage = MemoryStorage()
 dp = Dispatcher(bot, storage=storage)
-reset_button_text = "Вернуться к началу беседы"
 
 # States
 class Form(StatesGroup):
@@ -45,6 +44,11 @@ class Form(StatesGroup):
     stateExpectedWorkHoursQ = State()
     stateIURSSContribution = State()
     stateEnd = State()
+
+# Answers
+class Answers():
+    back_to_gegin_txt = "Вернуться к началу беседы"
+    i_looked_video_txt = "Я просмотрел презентацию"
 
 # You can use state '*' if you need to handle all states
 @dp.message_handler(state='*', commands='cancel')
@@ -71,9 +75,7 @@ async def cmd_start(message: types.Message):
 в размере 0.34% от ЗП.")
 
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True, selective=True)
-    markup.add("Я просмотрел презентацию", reset_button_text)
-    #markup.add("Other")
-    #await message.reply("What is your gender?", reply_markup=markup)
+    markup.add(Answers.i_looked_video_txt, Answers.back_to_gegin_txt)
 
     video_path = 'data/Greeting/Greeting-'+str(random.randint(0,3))+'.mp4'
     await bot.send_video(message.chat.id, open(video_path, 'rb'),
@@ -87,19 +89,19 @@ def get_voice(s="001"):
     return 'data/voice/chnv-001/'+str(datetime.datetime.now().hour+1)+'/'+s+'.mp3'
 
 async def check_reset(message):
-    if message.text == reset_button_text:
+    if message.text == Answers.back_to_gegin_txt:
         await Form.stateBegin.set()
         await cmd_start(message)
 
 @dp.message_handler(lambda message: message.text not in [
-    "Я просмотрел презентацию", reset_button_text], state=Form.stateBegin)
+    Answers.i_looked_video_txt, Answers.back_to_gegin_txt], state=Form.stateBegin)
 async def process_begin_invalid(message: types.Message):
     return await message.reply("Выберите вариант с экранной клавиатуры.")
 
 @dp.message_handler(state=Form.stateBegin)
 async def process_begin(message: types.Message):
     await check_reset(message)
-    if message.text == "Я просмотрел презентацию":
+    if message.text == Answers.i_looked_video_txt:
         markup = types.ReplyKeyboardRemove()
         #await process_closed_number(message)
         await bot.send_voice(message.chat.id, open(get_voice('004'), 'rb'),
@@ -116,6 +118,17 @@ async def process_begin(message: types.Message):
 #@dp.message_handler(state=Form.stateSocialNetworkQ)
 #async def process_social_network_q(message: types.Message):
 
+#------------------------------------------------------------------------------
+if __name__ == '__main__':
+    executor.start_polling(dp, skip_updates=True)
+
+#==============================================================================
+#==============================================================================
+#==============================================================================
+#==============================================================================
+#==============================================================================
+#==============================================================================
+#==============================================================================
 
 #@dp.message_handler(state=Form.name)
 #async def process_name(message: types.Message, state: FSMContext):
@@ -183,7 +196,3 @@ async def process_begin(message: types.Message):
 #
 #    # Finish conversation
 #    await state.finish()
-
-
-if __name__ == '__main__':
-    executor.start_polling(dp, skip_updates=True)
