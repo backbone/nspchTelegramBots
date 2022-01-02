@@ -9,6 +9,7 @@ from aiogram.dispatcher.filters.state import State, StatesGroup
 from aiogram.types import ParseMode
 from aiogram.utils import executor
 import random, datetime
+from aiogram.utils.markdown import bold, code, italic, text
 
 logging.basicConfig(level=logging.INFO)
 
@@ -52,6 +53,8 @@ class Answers():
     i_opened_phone_answ = "Я открыл номер телефона"
     yes_answ = "Да"
     no_answ = "Нет"
+    ready_answ = "Согласен"
+    refuse_answ = "Отказываюсь"
     soc_tiktok_answ = "Tik-Tok"
     soc_telegram_answ = "Telegram"
     soc_vkontakte_answ = "Vkontakte"
@@ -103,22 +106,6 @@ async def cancel_handler(message: types.Message, state: FSMContext):
     # And remove keyboard (just in case)
     await message.reply('Cancelled.', reply_markup=types.ReplyKeyboardRemove())
 
-@dp.message_handler(commands='start')
-async def cmd_start(message: types.Message):
-    await Form.stateBegin.set()
-    await bot.send_voice(message.chat.id, open(get_voice('001'), 'rb'),
-                         caption="Рады поприветствовать в ПрофСоюзе Правозащитников \
-без границ!\nПрофсоюз является экстерриториальным работодателем с профсоюзным взносом \
-в размере 0.34% от ЗП.")
-
-    markup = types.ReplyKeyboardMarkup(resize_keyboard=True, selective=True)
-    markup.add(Answers.i_looked_video_answ, Answers.back_to_begin_answ)
-
-    video_path = 'data/Greeting/Greeting-'+str(random.randint(0,3))+'.mp4'
-    await bot.send_video(message.chat.id, open(video_path, 'rb'),
-                         caption="Просмотрите ознакомительную видеопрезентацию.",
-                         reply_markup=markup)
-
 def get_voice(s="001"):
     h=datetime.datetime.now().hour+1
     hs=str(h)
@@ -129,57 +116,91 @@ def get_voice(s="001"):
 async def check_reset(message):
     if message.text == Answers.back_to_begin_answ:
         await cmd_start(message)
+        return True
+    return False
 
-@dp.message_handler(lambda message: message.text not in [
-    Answers.i_looked_video_answ, Answers.back_to_begin_answ], state=Form.stateBegin)
-async def process_begin_invalid(message: types.Message):
-    return await message.reply("Выберите вариант с экранной клавиатуры.")
-
-@dp.message_handler(state=Form.stateBegin)
-async def process_begin(message: types.Message):
-    await check_reset(message)
-    if message.text == Answers.i_looked_video_answ:
-        await Form.stateSocialNetworkQ.set()
-        markup = types.ReplyKeyboardMarkup(resize_keyboard=True, selective=True)
-        markup.add(Answers.soc_tiktok_answ, Answers.soc_telegram_answ,
-                   Answers.soc_vkontakte_answ, Answers.soc_instagram_answ,
-                   Answers.other_answ, Answers.back_to_begin_answ)
-        #await process_closed_number(message)
-        await bot.send_voice(message.chat.id, open(get_voice('004'), 'rb'),
-                             caption="Где вы получили информацию о нас?",
-                             reply_markup=markup)
-
+@dp.message_handler(commands='start')
+async def cmd_start(message: types.Message):
+    await Form.stateSocialNetworkQ.set()
+    await bot.send_voice(message.chat.id, open(get_voice('001'), 'rb'),
+                         caption="Рады поприветствовать в ПрофСоюзе Правозащитников "+
+                                 "без границ!\nПрофсоюз является экстерриториальным " +
+                                 "работодателем с профсоюзным взносом  в размере 0.34% от ЗП.")
+    await process_closed_number(message)
+    markup = types.ReplyKeyboardMarkup(resize_keyboard=True, selective=True)
+    markup.add(Answers.soc_tiktok_answ, Answers.soc_telegram_answ,
+               Answers.soc_vkontakte_answ, Answers.soc_instagram_answ,
+               Answers.other_answ, Answers.back_to_begin_answ)
+    await bot.send_voice(message.chat.id, open(get_voice('004'), 'rb'),
+                         caption="Где вы получили информацию о нас?",
+                         reply_markup=markup)
 
 # TODO: G O D  E Y E ===
-#@dp.message_handler(state=Form.stateClosedNumber)
-#async def process_closed_number(message: types.Message):
-#    if check_reset(message): return
-#    await message.reply("Глаз Бога пока не работает (не вижу, открыт ли номер)...")
+@dp.message_handler(state=Form.stateClosedNumber)
+async def process_closed_number(message: types.Message):
+    await message.reply(italic("// Глаз Бога пока не работает, не вижу, открыт ли номер"),
+                        parse_mode=ParseMode.MARKDOWN)
 
 @dp.message_handler(state=Form.stateSocialNetworkQ)
 async def process_social_network_q(message: types.Message, state: FSMContext):
+    if await check_reset(message): return
     async with state.proxy() as data:
         data['social_network'] = message.text
     if message.text == Answers.soc_tiktok_answ:
         await Form.stateTikTokCodeQ.set()
-        markup = types.ReplyKeyboardRemove()
         await bot.send_voice(message.chat.id, open(get_voice('005'), 'rb'),
                              caption="По коду какой страницы вы пришли?\n"+
                                      "(Это нам нужно для статистики)",
-                             reply_markup=markup)
+                             reply_markup=types.ReplyKeyboardRemove())
     else:
-        await cmd_start_job_interview()
-
-async def cmd_start_job_interview():
-    await Form.stateReadyToWorkQ.set()
-    
+        await Form.stateReadyToWorkQ.set()
+        await cmd_start_job_interview(message)
 
 @dp.message_handler(state=Form.stateTikTokCodeQ)
 async def process_tiktok_code_q(message: types.Message, state: FSMContext):
+    if await check_reset(message): return
     async with state.proxy() as data:
         data['tiktok_code'] = message.text
-    
+ 
+async def cmd_start_job_interview(message: types.Message):
+    if await check_reset(message): return
+    await Form.stateReadyToWorkQ.set()
 
+    markup = types.ReplyKeyboardMarkup(resize_keyboard=True, selective=True)
+    markup.add(Answers.i_looked_video_answ, Answers.back_to_begin_answ)
+
+    video_path = 'data/Greeting/Greeting-'+str(random.randint(0,3))+'.mp4'
+    await bot.send_video(message.chat.id, open(video_path, 'rb'),
+                         caption="Просмотрите ознакомительную видеопрезентацию.",
+                         reply_markup=markup)
+
+@dp.message_handler(lambda message: message.text not in [
+    Answers.i_looked_video_answ, Answers.back_to_begin_answ], state=Form.stateReadyToWorkQ)
+async def process_begin_job_interview_invalid(message: types.Message):
+    return await message.reply("Выберите вариант с экранной клавиатуры.")
+
+@dp.message_handler(state=Form.stateReadyToWorkQ)
+async def process_begin_job_interview(message: types.Message):
+    if await check_reset(message): return
+    if message.text == Answers.i_looked_video_answ:
+        markup = types.ReplyKeyboardMarkup(resize_keyboard=True, selective=True)
+        markup.add(Answers.ready_answ, Answers.refuse_answ, Answers.back_to_begin_answ)
+        await bot.send_voice(message.chat.id, open(get_voice('018'), 'rb'),
+                             caption="Мы трудоустраиваем вас в нашем Проекте и " +
+            "предоставляем вам 24/7 сопровождение командой поддержки до успешного " +
+            "состояния, даём вам базу знаний и наработок, выдаём инструменты и шаблоны, " +
+            "используя которые совершенно любой человек может хоть завтра начать " +
+            "зарабатывать в интернет.\nЕсли у вас нет своего контента для стримов, " +
+            "мы предоставим вам контент (с или без вашего участия).\nМы предлагаем " +
+            "вам з/п в размере Евр. МРОТ.\nСтоимость всех наших инструментов и услуг " +
+            "входит в единовременный Проф.взнос 0,34% от буд. з/п = 1700 ббр.\nВы " +
+            "получаете обучение правозащитной деятельности, журналистике, видео-монтажу, " +
+            "развиваетесь в IT-сфере, оттачиваете разговорную речь и повышаете " +
+            "дикторские способности.\nТрудовой договор заключается после 2-х нед. исп. срока.",
+                             reply_markup=markup)
+   
+#------------------------------------------------------------------------------
+#------------------------------------------------------------------------------
 #------------------------------------------------------------------------------
 if __name__ == '__main__':
     executor.start_polling(dp, skip_updates=True)
