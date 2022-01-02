@@ -20,7 +20,7 @@ bot = Bot(token=API_TOKEN)
 # For example use simple MemoryStorage for Dispatcher.
 storage = MemoryStorage()
 dp = Dispatcher(bot, storage=storage)
-
+reset_button_text = "Вернуться к началу беседы"
 
 # States
 class Form(StatesGroup):
@@ -46,12 +46,6 @@ class Form(StatesGroup):
     stateIURSSContribution = State()
     stateEnd = State()
 
-
-@dp.message_handler(commands='start')
-async def cmd_start(message: types.Message):
-    await Form.stateBegin.set()
-    await process_begin(message)
-
 # You can use state '*' if you need to handle all states
 @dp.message_handler(state='*', commands='cancel')
 @dp.message_handler(Text(equals='cancel', ignore_case=True), state='*')
@@ -69,34 +63,58 @@ async def cancel_handler(message: types.Message, state: FSMContext):
     # And remove keyboard (just in case)
     await message.reply('Cancelled.', reply_markup=types.ReplyKeyboardRemove())
 
-def get_voice(s="001"):
-    return 'data/voice/chnv-001/'+str(datetime.datetime.now().hour+1)+'/'+s+'.mp3'
-
-@dp.message_handler(state=Form.stateBegin)
-async def process_begin(message: types.Message):
+@dp.message_handler(commands='start')
+async def cmd_start(message: types.Message):
     await bot.send_voice(message.chat.id, open(get_voice('001'), 'rb'),
                          caption="Рады поприветствовать в ПрофСоюзе Правозащитников \
 без границ!\nПрофсоюз является экстерриториальным работодателем с профсоюзным взносом \
 в размере 0.34% от ЗП.")
 
+    markup = types.ReplyKeyboardMarkup(resize_keyboard=True, selective=True)
+    markup.add("Я просмотрел презентацию", reset_button_text)
+    #markup.add("Other")
+    #await message.reply("What is your gender?", reply_markup=markup)
+
     video_path = 'data/Greeting/Greeting-'+str(random.randint(0,3))+'.mp4'
     await bot.send_video(message.chat.id, open(video_path, 'rb'),
-                         caption="Просмотрите ознакомительную видеопрезентацию.")
-    await Form.next()
+                         caption="Просмотрите ознакомительную видеопрезентацию.",
+                         reply_markup=markup)
+
+
+    await Form.stateBegin.set()
+
+def get_voice(s="001"):
+    return 'data/voice/chnv-001/'+str(datetime.datetime.now().hour+1)+'/'+s+'.mp3'
+
+async def check_reset(message):
+    if message.text == reset_button_text:
+        await Form.stateBegin.set()
+        process_begin(message)
+        return True
+    return False
+
+@dp.message_handler(state=Form.stateBegin)
+async def process_begin(message: types.Message):
+    await check_reset(message)
+    if message.text == "Я просмотрел презентацию":
+        markup = types.ReplyKeyboardRemove()
+        await process_closed_number(message)
+        await bot.send_voice(message.chat.id, open(get_voice('004'), 'rb'),
+                             caption="Где вы получили информацию о нас?")
+        await Form.stateSocialNetworkQ.set()
+
+@dp.message_handler(lambda message: message.text not in [
+    "Я просмотрел презентацию", reset_button_text], state=Form.stateBegin)
+async def process_begin_invalid(message: types.Message):
+    return await message.reply("Выберите вариант с экранной клавиатуры.")
 
 # TODO: G O D  E Y E ===
 @dp.message_handler(state=Form.stateClosedNumber)
 async def process_closed_number(message: types.Message):
-    audio_path = 'data/voice/chnv-001/'+str(datetime.datetime.now().hour+1)+'/004.mp3'
     await message.reply("Глаз Бога пока не работает (не вижу, открыт ли номер)...")
-    await Form.stateSocialNetworkQ.set()
-    await process_social_network_q(message)
 
-@dp.message_handler(state=Form.stateSocialNetworkQ)
-async def process_social_network_q(message: types.Message):
-    print(get_voice('004'))
-    await bot.send_voice(message.chat.id, open(get_voice('004'), 'rb'),
-                         caption="Где вы получили информацию о нас?")
+#@dp.message_handler(state=Form.stateSocialNetworkQ)
+#async def process_social_network_q(message: types.Message):
 
 
 #@dp.message_handler(state=Form.name)
