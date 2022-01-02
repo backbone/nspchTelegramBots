@@ -47,15 +47,15 @@ class Form(StatesGroup):
 
 # Answers
 class Answers():
-    back_to_gegin_answ = "Вернуться к началу беседы"
+    back_to_begin_answ = "Вернуться к началу беседы"
     i_looked_video_answ = "Я просмотрел презентацию"
     i_opened_phone_answ = "Я открыл номер телефона"
     yes_answ = "Да"
     no_answ = "Нет"
-    tiktok_answ = "Tik-Tok"
-    telegram_answ = "Telegram"
-    vkontakte_answ = "Vkontakte"
-    instagram_answ = "Instagram"
+    soc_tiktok_answ = "Tik-Tok"
+    soc_telegram_answ = "Telegram"
+    soc_vkontakte_answ = "Vkontakte"
+    soc_instagram_answ = "Instagram"
     lt_10_answ = "<10"
     in_10_20_answ = "10-20"
     in_20_50_answ = "20-50"
@@ -105,21 +105,19 @@ async def cancel_handler(message: types.Message, state: FSMContext):
 
 @dp.message_handler(commands='start')
 async def cmd_start(message: types.Message):
+    await Form.stateBegin.set()
     await bot.send_voice(message.chat.id, open(get_voice('001'), 'rb'),
                          caption="Рады поприветствовать в ПрофСоюзе Правозащитников \
 без границ!\nПрофсоюз является экстерриториальным работодателем с профсоюзным взносом \
 в размере 0.34% от ЗП.")
 
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True, selective=True)
-    markup.add(Answers.i_looked_video_answ, Answers.back_to_gegin_answ)
+    markup.add(Answers.i_looked_video_answ, Answers.back_to_begin_answ)
 
     video_path = 'data/Greeting/Greeting-'+str(random.randint(0,3))+'.mp4'
     await bot.send_video(message.chat.id, open(video_path, 'rb'),
                          caption="Просмотрите ознакомительную видеопрезентацию.",
                          reply_markup=markup)
-
-
-    await Form.stateBegin.set()
 
 def get_voice(s="001"):
     h=datetime.datetime.now().hour+1
@@ -129,12 +127,11 @@ def get_voice(s="001"):
     return 'data/voice/chnv-001/'+hs+'/'+s+'.mp3'
 
 async def check_reset(message):
-    if message.text == Answers.back_to_gegin_answ:
-        await Form.stateBegin.set()
+    if message.text == Answers.back_to_begin_answ:
         await cmd_start(message)
 
 @dp.message_handler(lambda message: message.text not in [
-    Answers.i_looked_video_answ, Answers.back_to_gegin_answ], state=Form.stateBegin)
+    Answers.i_looked_video_answ, Answers.back_to_begin_answ], state=Form.stateBegin)
 async def process_begin_invalid(message: types.Message):
     return await message.reply("Выберите вариант с экранной клавиатуры.")
 
@@ -142,12 +139,16 @@ async def process_begin_invalid(message: types.Message):
 async def process_begin(message: types.Message):
     await check_reset(message)
     if message.text == Answers.i_looked_video_answ:
-        markup = types.ReplyKeyboardRemove()
+        await Form.stateSocialNetworkQ.set()
+        markup = types.ReplyKeyboardMarkup(resize_keyboard=True, selective=True)
+        markup.add(Answers.soc_tiktok_answ, Answers.soc_telegram_answ,
+                   Answers.soc_vkontakte_answ, Answers.soc_instagram_answ,
+                   Answers.other_answ, Answers.back_to_begin_answ)
         #await process_closed_number(message)
         await bot.send_voice(message.chat.id, open(get_voice('004'), 'rb'),
                              caption="Где вы получили информацию о нас?",
                              reply_markup=markup)
-        await Form.stateSocialNetworkQ.set()
+
 
 # TODO: G O D  E Y E ===
 #@dp.message_handler(state=Form.stateClosedNumber)
@@ -155,8 +156,29 @@ async def process_begin(message: types.Message):
 #    if check_reset(message): return
 #    await message.reply("Глаз Бога пока не работает (не вижу, открыт ли номер)...")
 
-#@dp.message_handler(state=Form.stateSocialNetworkQ)
-#async def process_social_network_q(message: types.Message):
+@dp.message_handler(state=Form.stateSocialNetworkQ)
+async def process_social_network_q(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['social_network'] = message.text
+    if message.text == Answers.soc_tiktok_answ:
+        await Form.stateTikTokCodeQ.set()
+        markup = types.ReplyKeyboardRemove()
+        await bot.send_voice(message.chat.id, open(get_voice('005'), 'rb'),
+                             caption="По коду какой страницы вы пришли?\n"+
+                                     "(Это нам нужно для статистики)",
+                             reply_markup=markup)
+    else:
+        await cmd_start_job_interview()
+
+async def cmd_start_job_interview():
+    await Form.stateReadyToWorkQ.set()
+    
+
+@dp.message_handler(state=Form.stateTikTokCodeQ)
+async def process_tiktok_code_q(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['tiktok_code'] = message.text
+    
 
 #------------------------------------------------------------------------------
 if __name__ == '__main__':
