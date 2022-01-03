@@ -145,8 +145,6 @@ async def check_reset(message: types.Message):
 @dp.message_handler(state=Form.stateSocialNetworkQ)
 async def process_social_network_q(message: types.Message, state: FSMContext):
     if await check_reset(message): return
-    async with state.proxy() as data:
-        data['social_network'] = message.text
     if message.text == Answers.soc_tiktok_answ:
         await Form.stateTikTokCodeQ.set()
         await bot.send_voice(message.chat.id, open(get_voice('005'), 'rb'),
@@ -156,12 +154,43 @@ async def process_social_network_q(message: types.Message, state: FSMContext):
     else:
         await Form.stateReadyToWorkQ.set()
         await cmd_start_job_interview(message)
+    async with state.proxy() as data:
+        data['social_network'] = message.text
 
 @dp.message_handler(state=Form.stateTikTokCodeQ)
 async def process_tiktok_code_q(message: types.Message, state: FSMContext):
     if await check_reset(message): return
+    await Form.stateStreamerQ.set()
     async with state.proxy() as data:
         data['tiktok_code'] = message.text
+    markup = types.ReplyKeyboardMarkup(resize_keyboard=True, selective=True)
+    markup.add(Answers.yes_answ, Answers.no_answ, Answers.back_to_begin_answ)
+    await bot.send_voice(message.chat.id, open(get_voice('006'), 'rb'),
+                         caption="Ведёте ли вы стримы?",
+                         reply_markup=markup)
+
+@dp.message_handler(state=Form.stateStreamerQ)
+async def process_tiktok_code_q(message: types.Message, state: FSMContext):
+    if await check_reset(message): return
+    if message.text == Answers.yes_answ:
+        await Form.stateViewersQ.set()
+        markup = types.ReplyKeyboardMarkup(resize_keyboard=True, selective=True)
+        markup.add(Answers.yes_answ, Answers.no_answ, Answers.back_to_begin_answ)
+        await bot.send_voice(message.chat.id, open(get_voice('010'), 'rb'),
+                             caption="Делаете ли вы взаимные подписки для " +
+                             "взаимного увеличения подписчиков?",
+                             reply_markup=markup)
+    else:
+        await Form.stateMutualSubscriptionsQ.set()
+        markup = types.ReplyKeyboardMarkup(resize_keyboard=True, selective=True)
+        markup.add(Answers.lt_10_answ, Answers.in_10_20_answ,
+                Answers.in_20_50_answ, Answers.gt_50_answ,
+                Answers.back_to_begin_answ)
+        await bot.send_voice(message.chat.id, open(get_voice('007'), 'rb'),
+                             caption="Сколько зрителей вас смотрят (в среднем) ?",
+                             reply_markup=markup)
+    async with state.proxy() as data:
+        data['is_streamer'] = message.text
  
 async def cmd_start_job_interview(message: types.Message):
     if await check_reset(message): return
