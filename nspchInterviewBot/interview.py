@@ -364,7 +364,7 @@ async def process_ready_to_work_q(message: types.Message):
         await bot.send_voice(message.chat.id, open(get_voice('013'), 'rb'),
                              caption="Ваш возраст?", reply_markup=markup)
     else:
-        cmd_good_luck_end(message)
+        await cmd_good_luck_end(message)
 
 @dp.message_handler(state=Form.stateWorkerAgeQ)
 async def process_worker_age_q(message: types.Message):
