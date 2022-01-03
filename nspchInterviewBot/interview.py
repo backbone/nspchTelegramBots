@@ -401,6 +401,25 @@ async def process_timezone_q(message: types.Message):
 async def process_profession_q(message: types.Message):
     if await check_reset(message): return
     await Form.stateExpectedSalaryQ.set()
+    markup = types.ReplyKeyboardMarkup(resize_keyboard=True, selective=True)
+    markup.add(Answers.salary_1536_answ, Answers.salary_3840_answ,
+            Answers.salary_5952_answ, Answers.back_to_begin_answ)
+    await bot.send_voice(message.chat.id, open(get_voice('021'), 'rb'),
+        caption="Мы являемся ПрофСоюзом/Государственными Представителями..!!!\n" +
+        "И у нас существует Проф.Союзный взнос 1700, а это 0,34% от з/п.\n" +
+        "ВАШЕ ЛИЧНОЕ ПРЕДСТАВЛЕНИЕ О ДОСТОЙНОЙ ЗАРПЛАТЕ..?!?!?!\n\n" +
+        "Сколько бы вы хотели зарабатывать..???",
+        reply_markup=markup)
+    async with state.proxy() as data:
+        data['profession'] = message.text
+
+@dp.message_handler(state=Form.stateExpectedSalaryQ)
+async def process_expected_salary_q(message: types.Message):
+    if await check_reset(message): return
+    await Form.stateExpectedWorkHoursQ.set()
+
+    async with state.proxy() as data:
+        data['expected_salary'] = message.text
 
 async def cmd_bring_parents(message: types.Message):
     if await check_reset(message): return
