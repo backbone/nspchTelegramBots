@@ -305,7 +305,7 @@ async def process_tiktok_screenshot_q(message: types.Message, state: FSMContext)
         "пригласим перед запуском Проекта на видеоконференцию в Telegram.\n" +
         "Пожелание: за это время постараться набрать модераторов.",
          reply_markup=types.ReplyKeyboardRemove())
-    await cmd_send_tiktok_data()
+    await cmd_send_tiktok_data(message)
     await Form.stateEnd.set()
     await bot.send_voice(message.chat.id, open(get_voice('017'), 'rb'),
                          caption="Данные переданы! Ждите, с Вами свяжутся!",
@@ -419,8 +419,8 @@ async def process_expected_salary_q(message: types.Message):
         data['expected_salary'] = message.text
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True, selective=True)
     markup.add(Answers.hours_1_answ, Answers.hours_2_answ,
-    markup.add(Answers.hours_4_answ, Answers.hours_8_answ,
-    markup.add(Answers.hours_16_answ, Answers.hours_20_answ,
+               Answers.hours_4_answ, Answers.hours_8_answ,
+               Answers.hours_16_answ, Answers.hours_20_answ,
                Answers.back_to_begin_answ)
     await bot.send_voice(message.chat.id, open(get_voice('022'), 'rb'),
         caption="Сколько часов в день инвестируя, вы хотели бы у Нас трудиться..???",
