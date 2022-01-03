@@ -284,11 +284,36 @@ async def process_tiktok_age_q(message: types.Message, state: FSMContext):
     if await check_reset(message): return
     if message.text == Answers.age_gt_16_answ:
         await Form.stateTikTokScreenshotQ.set()
+        markup.add(Answers.back_to_begin_answ)
+        await bot.send_voice(message.chat.id, open(get_voice('015'), 'rb'),
+                             caption="Отправьте нам скриншот своего аккаунта " +
+                             "для подтверждения.", reply_markup=markup)
     else:
         await cmd_bring_parents(message)
     async with state.proxy() as data:
-        data['is_pusher'] = "Да"
-        data['has_team'] = message.text
+        data['age'] = message.text
+
+# TODO: process/filter/check screenshot (not message)
+@dp.message_handler(state=Form.stateTikTokScreenshotQ)
+async def process_tiktok_screenshot_q(message: types.Message, state: FSMContext):
+    if await check_reset(message): return
+    await bot.send_voice(message.chat.id, open(get_voice('016'), 'rb'),
+                         caption="Сейчас мы дорабатываем алгоритмы, проводим " +
+        "финальные тесты.\nКак только мы завершим набор и будет всё готово, мы " +
+        "свяжемся с вами!\nНам нужна команда (желательно, в идеале, 12 модераторов " +
+        "на каждого стримера).\n\nУ нас есть ваш телефонный номер и мы Вас " +
+        "пригласим перед запуском Проекта на видеоконференцию в Telegram.\n" +
+        "Пожелание: за это время постараться набрать модераторов.",
+         reply_markup=types.ReplyKeyboardRemove())
+    await cmd_send_tiktok_data()
+    await Form.stateEnd.set()
+    await bot.send_voice(message.chat.id, open(get_voice('017'), 'rb'),
+                         caption="Данные переданы! Ждите, с Вами свяжутся!",
+         reply_markup=types.ReplyKeyboardRemove())
+
+async def cmd_send_tiktok_data(message: types.Message):
+    await message.reply(italic("Пересылка данных стримера, пушера Виктору"),
+                        parse_mode=ParseMode.MARKDOWN)
 
 async def cmd_start_job_interview(message: types.Message):
     if await check_reset(message): return
