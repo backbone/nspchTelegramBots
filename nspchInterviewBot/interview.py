@@ -113,12 +113,6 @@ def get_voice(s="001"):
         hs='0'+hs
     return 'data/voice/chnv-001/'+hs+'/'+s+'.mp3'
 
-async def check_reset(message):
-    if message.text == Answers.back_to_begin_answ:
-        await cmd_start(message)
-        return True
-    return False
-
 @dp.message_handler(commands='start')
 async def cmd_start(message: types.Message):
     await Form.stateSocialNetworkQ.set()
@@ -140,6 +134,13 @@ async def cmd_start(message: types.Message):
 async def process_closed_number(message: types.Message):
     await message.reply(italic("// Глаз Бога пока не работает, не вижу, открыт ли номер"),
                         parse_mode=ParseMode.MARKDOWN)
+
+@dp.message_handler(text=[Answers.back_to_begin_answ])
+async def check_reset(message: types.Message):
+    if message.text == Answers.back_to_begin_answ:
+        await cmd_start(message)
+        return True
+    return False
 
 @dp.message_handler(state=Form.stateSocialNetworkQ)
 async def process_social_network_q(message: types.Message, state: FSMContext):
