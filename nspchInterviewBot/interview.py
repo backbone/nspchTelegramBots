@@ -157,10 +157,8 @@ async def process_social_network_q(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['social_network'] = message.text
         data['is_streamer'] = "Нет"
-        data['viewers'] = "0"
         data['is_pusher'] = "Нет"
         data['has_team'] = "Нет"
-        data['streams_time'] = ""
         data['mutual_subscriptions'] = "Нет"
 
 @dp.message_handler(state=Form.stateTikTokCodeQ)
@@ -417,9 +415,21 @@ async def process_profession_q(message: types.Message):
 async def process_expected_salary_q(message: types.Message):
     if await check_reset(message): return
     await Form.stateExpectedWorkHoursQ.set()
-
+    markup = types.ReplyKeyboardMarkup(resize_keyboard=True, selective=True)
+    markup.add(Answers.hours_1_answ, Answers.hours_2_answ,
+    markup.add(Answers.hours_4_answ, Answers.hours_8_answ,
+    markup.add(Answers.hours_16_answ, Answers.hours_20_answ,
+               Answers.back_to_begin_answ)
+    await bot.send_voice(message.chat.id, open(get_voice('022'), 'rb'),
+        caption="Сколько часов в день инвестируя, вы хотели бы у Нас трудиться..???",
+        reply_markup=markup)
     async with state.proxy() as data:
         data['expected_salary'] = message.text
+
+@dp.message_handler(state=Form.stateExpectedWorkHoursQ)
+async def process_expected_work_hours_q(message: types.Message):
+    if await check_reset(message): return
+    await Form.stateIURSSContribution.set()
 
 async def cmd_bring_parents(message: types.Message):
     if await check_reset(message): return
