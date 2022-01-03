@@ -152,7 +152,6 @@ async def process_social_network_q(message: types.Message, state: FSMContext):
                                      "(Это нам нужно для статистики)",
                              reply_markup=types.ReplyKeyboardRemove())
     else:
-        await Form.stateReadyToWorkQ.set()
         await cmd_start_job_interview(message)
     async with state.proxy() as data:
         data['social_network'] = message.text
@@ -170,7 +169,7 @@ async def process_tiktok_code_q(message: types.Message, state: FSMContext):
                          reply_markup=markup)
 
 @dp.message_handler(state=Form.stateStreamerQ)
-async def process_tiktok_code_q(message: types.Message, state: FSMContext):
+async def process_streamer_q(message: types.Message, state: FSMContext):
     if await check_reset(message): return
     if message.text == Answers.yes_answ:
         await Form.stateViewersQ.set()
@@ -192,6 +191,49 @@ async def process_tiktok_code_q(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['is_streamer'] = message.text
  
+@dp.message_handler(state=Form.stateViewersQ)
+async def process_viewers_q(message: types.Message, state: FSMContext):
+    if await check_reset(message): return
+    await Form.stateStreamTimeQ.set()
+    markup = types.ReplyKeyboardMarkup(resize_keyboard=True, selective=True)
+    markup.add(Answers.time_00_06_answ, Answers.time_06_12_answ,
+            Answers.time_12_18_answ, Answers.time_18_24_answ,
+            Answers.back_to_begin_answ)
+    await bot.send_voice(message.chat.id, open(get_voice('008'), 'rb'),
+                         caption="В какое время вы ведёте стримы?",
+                         reply_markup=markup)
+    async with state.proxy() as data:
+        data['viewers'] = message.text
+
+@dp.message_handler(state=Form.stateStreamTimeQ)
+async def process_stream_time_q(message: types.Message, state: FSMContext):
+    if await check_reset(message): return
+    await Form.stateStreamerTeamQ.set()
+    markup = types.ReplyKeyboardMarkup(resize_keyboard=True, selective=True)
+    markup.add(Answers.yes_answ, Answers.no_answ, Answers.back_to_begin_answ)
+    await bot.send_voice(message.chat.id, open(get_voice('009'), 'rb'),
+                         caption="Есть ли у вас своя команда (модераторов, пушеров) ?",
+                         reply_markup=markup)
+    async with state.proxy() as data:
+        data['streams_time'] = message.text
+
+@dp.message_handler(state=Form.stateStreamerTeamQ)
+async def process_streamer_team_q(message: types.Message, state: FSMContext):
+    if await check_reset(message): return
+    await cmd_start_marathon(message)
+    async with state.proxy() as data:
+        data['has_team'] = message.text
+
+async def cmd_start_marathon(message: types.Message):
+    await Form.stateWantTikTokQ.set()
+    markup = types.ReplyKeyboardMarkup(resize_keyboard=True, selective=True)
+    markup.add(Answers.yes_answ, Answers.no_answ, Answers.back_to_begin_answ)
+    await bot.send_voice(message.chat.id, open(get_voice('012'), 'rb'),
+                         caption="Отлично, мы запускаем марафон 24/7 стрим-трансляции, " +
+            "команда стримеров/модераторов передаёт актив по эстафете друг другу.\n" +
+            "Хотели бы вы поучаствовать в таком широкомасштабном проекте?",
+            reply_markup=markup)
+
 async def cmd_start_job_interview(message: types.Message):
     if await check_reset(message): return
     await Form.stateReadyToWorkQ.set()
