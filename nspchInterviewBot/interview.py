@@ -173,7 +173,7 @@ async def process_tiktok_code_q(message: types.Message, state: FSMContext):
 async def process_tiktok_code_q(message: types.Message, state: FSMContext):
     if await check_reset(message): return
     if message.text == Answers.yes_answ:
-        await Form.stateMutualSubscriptionsQ.set()
+        await Form.stateViewersQ.set()
         markup = types.ReplyKeyboardMarkup(resize_keyboard=True, selective=True)
         markup.add(Answers.lt_10_answ, Answers.in_10_20_answ,
                 Answers.in_20_50_answ, Answers.gt_50_answ,
@@ -182,7 +182,7 @@ async def process_tiktok_code_q(message: types.Message, state: FSMContext):
                              caption="Сколько зрителей вас смотрят (в среднем) ?",
                              reply_markup=markup)
     else:
-        await Form.stateViewersQ.set()
+        await Form.stateMutualSubscriptionsQ.set()
         markup = types.ReplyKeyboardMarkup(resize_keyboard=True, selective=True)
         markup.add(Answers.yes_answ, Answers.no_answ, Answers.back_to_begin_answ)
         await bot.send_voice(message.chat.id, open(get_voice('010'), 'rb'),
