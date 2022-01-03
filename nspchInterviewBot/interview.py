@@ -285,6 +285,7 @@ async def process_tiktok_age_q(message: types.Message, state: FSMContext):
     if await check_reset(message): return
     if message.text == Answers.age_gt_16_answ:
         await Form.stateTikTokScreenshotQ.set()
+        markup = types.ReplyKeyboardMarkup(resize_keyboard=True, selective=True)
         markup.add(Answers.back_to_begin_answ)
         await bot.send_voice(message.chat.id, open(get_voice('015'), 'rb'),
                              caption="Отправьте нам скриншот своего аккаунта " +
@@ -366,6 +367,21 @@ async def process_ready_to_work_q(message: types.Message):
                              caption="Ваш возраст?", reply_markup=markup)
     else:
         cmd_good_luck_end(message)
+
+@dp.message_handler(state=Form.stateWorkerAgeQ)
+async def process_worker_age_q(message: types.Message):
+    if await check_reset(message): return
+    if message.text == Answers.age_gt_16_answ:
+        await Form.stateTimeZoneQ.set()
+        markup = types.ReplyKeyboardMarkup(resize_keyboard=True, selective=True)
+        markup.add(Answers.back_to_begin_answ)
+        await bot.send_voice(message.chat.id, open(get_voice('019'), 'rb'),
+                             caption="Какой у вас часовой пояс?", reply_markup=markup)
+    else:
+        await cmd_bring_parents(message)
+    async with state.proxy() as data:
+        data['age'] = message.text
+
 
 async def cmd_bring_parents(message: types.Message):
     if await check_reset(message): return
