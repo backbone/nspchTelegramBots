@@ -282,6 +282,13 @@ async def process_want_tiktok_q(message: types.Message):
 @dp.message_handler(state=Form.stateTikTokAgeQ)
 async def process_tiktok_age_q(message: types.Message, state: FSMContext):
     if await check_reset(message): return
+    if message.text == Answers.age_gt_16_answ:
+        await Form.stateTikTokScreenshotQ.set()
+    else:
+        await cmd_bring_parents(message)
+    async with state.proxy() as data:
+        data['is_pusher'] = "Да"
+        data['has_team'] = message.text
 
 async def cmd_start_job_interview(message: types.Message):
     if await check_reset(message): return
@@ -319,6 +326,15 @@ async def process_begin_job_interview(message: types.Message):
             "развиваетесь в IT-сфере, оттачиваете разговорную речь и повышаете " +
             "дикторские способности.\nТрудовой договор заключается после 2-х нед. исп. срока.",
                              reply_markup=markup)
+
+async def cmd_bring_parents(message: types.Message):
+    if await check_reset(message): return
+    await Form.stateEnd.set()
+    await bot.send_voice(message.chat.id, open(get_voice('014'), 'rb'),
+                         caption="Участники младше 16 лет допускаются только с согласия " +
+                         "родителей.\nПожалуйста, приходите на собеседование с родителями!\n" +
+                         "Благодарю за беседу. До встречи!",
+                         reply_markup=types.ReplyKeyboardRemove())
 
 async def cmd_good_luck_end(message: types.Message):
     if await check_reset(message): return
