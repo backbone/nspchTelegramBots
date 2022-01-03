@@ -233,12 +233,15 @@ async def process_streamer_team_q(message: types.Message, state: FSMContext):
 @dp.message_handler(state=Form.stateMutualSubscriptionsQ)
 async def process_mutual_subscriptions_q(message: types.Message, state: FSMContext):
     if await check_reset(message): return
-    await Form.statePusherTeamQ.set()
-    markup = types.ReplyKeyboardMarkup(resize_keyboard=True, selective=True)
-    markup.add(Answers.yes_answ, Answers.no_answ, Answers.back_to_begin_answ)
-    await bot.send_voice(message.chat.id, open(get_voice('011'), 'rb'),
-                         caption="Есть ли у вас своя команда?",
-                         reply_markup=markup)
+    if message.text == Answers.yes_answ:
+        await Form.statePusherTeamQ.set()
+        markup = types.ReplyKeyboardMarkup(resize_keyboard=True, selective=True)
+        markup.add(Answers.yes_answ, Answers.no_answ, Answers.back_to_begin_answ)
+        await bot.send_voice(message.chat.id, open(get_voice('011'), 'rb'),
+                             caption="Есть ли у вас своя команда?",
+                             reply_markup=markup)
+    else:
+        await cmd_start_job_interview(message)
     async with state.proxy() as data:
         data['mutual_subscriptions'] = message.text
 
@@ -254,6 +257,7 @@ async def process_pusher_team_q(message: types.Message, state: FSMContext):
         await cmd_start_job_interview(message)
 
 async def cmd_start_marathon(message: types.Message):
+    if await check_reset(message): return
     await Form.stateWantTikTokQ.set()
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True, selective=True)
     markup.add(Answers.yes_answ, Answers.no_answ, Answers.back_to_begin_answ)
@@ -262,6 +266,22 @@ async def cmd_start_marathon(message: types.Message):
             "команда стримеров/модераторов передаёт актив по эстафете друг другу.\n" +
             "Хотели бы вы поучаствовать в таком широкомасштабном проекте?",
             reply_markup=markup)
+
+@dp.message_handler(state=Form.stateWantTikTokQ)
+async def process_want_tiktok_q(message: types.Message):
+    if await check_reset(message): return
+    if message.text == Answers.yes_answ:
+        await Form.stateTikTokAgeQ.set()
+        markup = types.ReplyKeyboardMarkup(resize_keyboard=True, selective=True)
+        markup.add(Answers.age_lt_16_answ, Answers.age_gt_16_answ, Answers.back_to_begin_answ)
+        await bot.send_voice(message.chat.id, open(get_voice('013'), 'rb'),
+                             caption="Ваш возраст?", reply_markup=markup)
+    else:
+        await cmd_good_luck_end()
+
+@dp.message_handler(state=Form.stateTikTokAgeQ)
+async def process_tiktok_age_q(message: types.Message, state: FSMContext):
+    if await check_reset(message): return
 
 async def cmd_start_job_interview(message: types.Message):
     if await check_reset(message): return
@@ -299,6 +319,13 @@ async def process_begin_job_interview(message: types.Message):
             "развиваетесь в IT-сфере, оттачиваете разговорную речь и повышаете " +
             "дикторские способности.\nТрудовой договор заключается после 2-х нед. исп. срока.",
                              reply_markup=markup)
+
+async def cmd_good_luck_end(message: types.Message):
+    if await check_reset(message): return
+    await Form.stateEnd.set()
+    await bot.send_voice(message.chat.id, open(get_voice('024'), 'rb'),
+                         caption="В С Е Г О   Х О Р О Ш Е Г О !!!",
+                         reply_markup=types.ReplyKeyboardRemove())
    
 #------------------------------------------------------------------------------
 #------------------------------------------------------------------------------
