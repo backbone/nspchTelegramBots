@@ -37,6 +37,7 @@ class Form(StatesGroup):
     stateWantTikTokQ = State()
     stateTikTokAgeQ = State()
     stateTikTokScreenshotQ = State()
+    stateShowPresentation = State()
     stateReadyToWorkQ = State()
     stateWorkerAgeQ = State()
     stateTimeZoneQ = State()
@@ -311,13 +312,14 @@ async def process_tiktok_screenshot_q(message: types.Message, state: FSMContext)
                          caption="Данные переданы! Ждите, с Вами свяжутся!",
          reply_markup=types.ReplyKeyboardRemove())
 
+# TODO: send data
 async def cmd_send_tiktok_data(message: types.Message):
     await message.reply(italic("Пересылка данных стримера, пушера Виктору"),
                         parse_mode=ParseMode.MARKDOWN)
 
 async def cmd_start_job_interview(message: types.Message):
     if await check_reset(message): return
-    await Form.stateReadyToWorkQ.set()
+    await Form.stateShowPresentation.set()
 
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True, selective=True)
     markup.add(Answers.i_looked_video_answ, Answers.back_to_begin_answ)
@@ -328,14 +330,15 @@ async def cmd_start_job_interview(message: types.Message):
                          reply_markup=markup)
 
 @dp.message_handler(lambda message: message.text not in [
-    Answers.i_looked_video_answ, Answers.back_to_begin_answ], state=Form.stateReadyToWorkQ)
+    Answers.i_looked_video_answ, Answers.back_to_begin_answ], state=Form.stateShowPresentation)
 async def process_begin_job_interview_invalid(message: types.Message):
     return await message.reply("Выберите вариант с экранной клавиатуры.")
 
-@dp.message_handler(state=Form.stateReadyToWorkQ)
+@dp.message_handler(state=Form.stateShowPresentation)
 async def process_begin_job_interview(message: types.Message):
     if await check_reset(message): return
     if message.text == Answers.i_looked_video_answ:
+        await Form.stateReadyToWorkQ.set()
         markup = types.ReplyKeyboardMarkup(resize_keyboard=True, selective=True)
         markup.add(Answers.ready_answ, Answers.refuse_answ, Answers.back_to_begin_answ)
         await bot.send_voice(message.chat.id, open(get_voice('018'), 'rb'),
@@ -351,6 +354,18 @@ async def process_begin_job_interview(message: types.Message):
             "развиваетесь в IT-сфере, оттачиваете разговорную речь и повышаете " +
             "дикторские способности.\nТрудовой договор заключается после 2-х нед. исп. срока.",
                              reply_markup=markup)
+
+@dp.message_handler(state=Form.stateReadyToWorkQ)
+async def process_ready_to_work_q(message: types.Message):
+    if await check_reset(message): return
+    if message.text == Answers.ready_answ:
+        await Form.stateWorkerAgeQ.set()
+        markup = types.ReplyKeyboardMarkup(resize_keyboard=True, selective=True)
+        markup.add(Answers.age_lt_16_answ, Answers.age_gt_16_answ, Answers.back_to_begin_answ)
+        await bot.send_voice(message.chat.id, open(get_voice('013'), 'rb'),
+                             caption="Ваш возраст?", reply_markup=markup)
+    else:
+        cmd_good_luck_end(message)
 
 async def cmd_bring_parents(message: types.Message):
     if await check_reset(message): return
