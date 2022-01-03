@@ -155,6 +155,12 @@ async def process_social_network_q(message: types.Message, state: FSMContext):
         await cmd_start_job_interview(message)
     async with state.proxy() as data:
         data['social_network'] = message.text
+        data['is_streamer'] = "Нет"
+        data['viewers'] = "0"
+        data['is_pusher'] = "Нет"
+        data['has_team'] = "Нет"
+        data['streams_time'] = ""
+        data['mutual_subscriptions'] = "Нет"
 
 @dp.message_handler(state=Form.stateTikTokCodeQ)
 async def process_tiktok_code_q(message: types.Message, state: FSMContext):
@@ -223,6 +229,29 @@ async def process_streamer_team_q(message: types.Message, state: FSMContext):
     await cmd_start_marathon(message)
     async with state.proxy() as data:
         data['has_team'] = message.text
+
+@dp.message_handler(state=Form.stateMutualSubscriptionsQ)
+async def process_mutual_subscriptions_q(message: types.Message, state: FSMContext):
+    if await check_reset(message): return
+    await Form.statePusherTeamQ.set()
+    markup = types.ReplyKeyboardMarkup(resize_keyboard=True, selective=True)
+    markup.add(Answers.yes_answ, Answers.no_answ, Answers.back_to_begin_answ)
+    await bot.send_voice(message.chat.id, open(get_voice('011'), 'rb'),
+                         caption="Есть ли у вас своя команда?",
+                         reply_markup=markup)
+    async with state.proxy() as data:
+        data['mutual_subscriptions'] = message.text
+
+@dp.message_handler(state=Form.statePusherTeamQ)
+async def process_pusher_team_q(message: types.Message, state: FSMContext):
+    if await check_reset(message): return
+    if message.text == Answers.yes_answ:
+        await cmd_start_marathon(message)
+        async with state.proxy() as data:
+            data['is_pusher'] = "Да"
+            data['has_team'] = message.text
+    else:
+        await cmd_start_job_interview(message)
 
 async def cmd_start_marathon(message: types.Message):
     await Form.stateWantTikTokQ.set()
