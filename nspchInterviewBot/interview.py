@@ -391,7 +391,7 @@ async def process_timezone_q(message: types.Message, state: FSMContext):
             Answers.prof_mark_answ, Answers.prof_book_keeper_answ,
             Answers.prof_smm_answ, Answers.prof_journalist_answ,
             Answers.prof_video_editor_answ, Answers.prof_speaker_answ,
-            Answers.prof_teacher_answ, Ansers.other, Answers.back_to_begin_answ)
+            Answers.prof_teacher_answ, Answers.other_answ, Answers.back_to_begin_answ)
     await bot.send_voice(message.chat.id, open(get_voice('020'), 'rb'),
                          caption="Основной вид деятельности?", reply_markup=markup)
 
