@@ -367,7 +367,7 @@ async def process_ready_to_work_q(message: types.Message):
         await cmd_good_luck_end(message)
 
 @dp.message_handler(state=Form.stateWorkerAgeQ)
-async def process_worker_age_q(message: types.Message):
+async def process_worker_age_q(message: types.Message, state: FSMContext):
     if await check_reset(message): return
     if message.text == Answers.age_gt_16_answ:
         await Form.stateTimeZoneQ.set()
@@ -381,7 +381,7 @@ async def process_worker_age_q(message: types.Message):
         data['age'] = message.text
 
 @dp.message_handler(state=Form.stateTimeZoneQ)
-async def process_timezone_q(message: types.Message):
+async def process_timezone_q(message: types.Message, state: FSMContext):
     if await check_reset(message): return
     await Form.stateProfessionQ.set()
     async with state.proxy() as data:
@@ -396,7 +396,7 @@ async def process_timezone_q(message: types.Message):
                          caption="Основной вид деятельности?", reply_markup=markup)
 
 @dp.message_handler(state=Form.stateProfessionQ)
-async def process_profession_q(message: types.Message):
+async def process_profession_q(message: types.Message, state: FSMContext):
     if await check_reset(message): return
     await Form.stateExpectedSalaryQ.set()
     async with state.proxy() as data:
@@ -412,7 +412,7 @@ async def process_profession_q(message: types.Message):
         reply_markup=markup)
 
 @dp.message_handler(state=Form.stateExpectedSalaryQ)
-async def process_expected_salary_q(message: types.Message):
+async def process_expected_salary_q(message: types.Message, state: FSMContext):
     if await check_reset(message): return
     await Form.stateExpectedWorkHoursQ.set()
     async with state.proxy() as data:
@@ -427,7 +427,7 @@ async def process_expected_salary_q(message: types.Message):
         reply_markup=markup)
 
 @dp.message_handler(state=Form.stateExpectedWorkHoursQ)
-async def process_expected_work_hours_q(message: types.Message):
+async def process_expected_work_hours_q(message: types.Message, state: FSMContext):
     if await check_reset(message): return
     await Form.stateIURSSContribution.set()
     async with state.proxy() as data:
