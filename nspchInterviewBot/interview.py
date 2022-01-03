@@ -382,6 +382,25 @@ async def process_worker_age_q(message: types.Message):
     async with state.proxy() as data:
         data['age'] = message.text
 
+@dp.message_handler(state=Form.stateTimeZoneQ)
+async def process_timezone_q(message: types.Message):
+    if await check_reset(message): return
+    await Form.stateProfessionQ.set()
+    markup = types.ReplyKeyboardMarkup(resize_keyboard=True, selective=True)
+    markup.add(Answers.prof_it_answ, Answers.prof_jurist_answ,
+            Answers.prof_mark_answ, Answers.prof_book_keeper_answ,
+            Answers.prof_smm_answ, Answers.prof_journalist_answ,
+            Answers.prof_video_editor_answ, Answers.prof_speaker_answ,
+            Answers.prof_teacher_answ, Ansers.other, Answers.back_to_begin_answ)
+    await bot.send_voice(message.chat.id, open(get_voice('020'), 'rb'),
+                         caption="Основной вид деятельности?", reply_markup=markup)
+    async with state.proxy() as data:
+        data['timezone'] = message.text
+
+@dp.message_handler(state=Form.stateProfessionQ)
+async def process_profession_q(message: types.Message):
+    if await check_reset(message): return
+    await Form.stateExpectedSalaryQ.set()
 
 async def cmd_bring_parents(message: types.Message):
     if await check_reset(message): return
