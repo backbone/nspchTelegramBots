@@ -276,7 +276,7 @@ async def process_want_tiktok_q(message: types.Message):
         await bot.send_voice(message.chat.id, open(get_voice('013'), 'rb'),
                              caption="Ваш возраст?", reply_markup=markup)
     else:
-        await cmd_good_luck_end()
+        await cmd_good_luck_end(message)
 
 @dp.message_handler(state=Form.stateTikTokAgeQ)
 async def process_tiktok_age_q(message: types.Message, state: FSMContext):
