@@ -384,6 +384,8 @@ async def process_worker_age_q(message: types.Message):
 async def process_timezone_q(message: types.Message):
     if await check_reset(message): return
     await Form.stateProfessionQ.set()
+    async with state.proxy() as data:
+        data['timezone'] = message.text
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True, selective=True)
     markup.add(Answers.prof_it_answ, Answers.prof_jurist_answ,
             Answers.prof_mark_answ, Answers.prof_book_keeper_answ,
@@ -392,13 +394,13 @@ async def process_timezone_q(message: types.Message):
             Answers.prof_teacher_answ, Ansers.other, Answers.back_to_begin_answ)
     await bot.send_voice(message.chat.id, open(get_voice('020'), 'rb'),
                          caption="Основной вид деятельности?", reply_markup=markup)
-    async with state.proxy() as data:
-        data['timezone'] = message.text
 
 @dp.message_handler(state=Form.stateProfessionQ)
 async def process_profession_q(message: types.Message):
     if await check_reset(message): return
     await Form.stateExpectedSalaryQ.set()
+    async with state.proxy() as data:
+        data['profession'] = message.text
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True, selective=True)
     markup.add(Answers.salary_1536_answ, Answers.salary_3840_answ,
             Answers.salary_5952_answ, Answers.back_to_begin_answ)
@@ -408,13 +410,13 @@ async def process_profession_q(message: types.Message):
         "ВАШЕ ЛИЧНОЕ ПРЕДСТАВЛЕНИЕ О ДОСТОЙНОЙ ЗАРПЛАТЕ..?!?!?!\n\n" +
         "Сколько бы вы хотели зарабатывать..???",
         reply_markup=markup)
-    async with state.proxy() as data:
-        data['profession'] = message.text
 
 @dp.message_handler(state=Form.stateExpectedSalaryQ)
 async def process_expected_salary_q(message: types.Message):
     if await check_reset(message): return
     await Form.stateExpectedWorkHoursQ.set()
+    async with state.proxy() as data:
+        data['expected_salary'] = message.text
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True, selective=True)
     markup.add(Answers.hours_1_answ, Answers.hours_2_answ,
     markup.add(Answers.hours_4_answ, Answers.hours_8_answ,
@@ -423,13 +425,27 @@ async def process_expected_salary_q(message: types.Message):
     await bot.send_voice(message.chat.id, open(get_voice('022'), 'rb'),
         caption="Сколько часов в день инвестируя, вы хотели бы у Нас трудиться..???",
         reply_markup=markup)
-    async with state.proxy() as data:
-        data['expected_salary'] = message.text
 
 @dp.message_handler(state=Form.stateExpectedWorkHoursQ)
 async def process_expected_work_hours_q(message: types.Message):
     if await check_reset(message): return
     await Form.stateIURSSContribution.set()
+    async with state.proxy() as data:
+        data['working_hours'] = message.text
+    await bot.send_voice(message.chat.id, open(get_voice('023'), 'rb'),
+        caption="Отлично..!!!\nИспытательный срок у нас 2 недели.\n" +
+        "ВЫ ПОЛУЧАЕТЕ 9,35€ в час с условием, что трудитесь на совесть.\n" +
+        "Напоминаю, у нас нет спонсоров! Мы как Народовластие всё организуем " +
+        "сами!\nПоэтому каждый вносит единоразовый ПрофСоюзный взнос.",
+        reply_markup=types.ReplyKeyboardRemove())
+    await cmd_payment(message)
+    await select_nuncio(message)
+    await send_data_to_nuncio(message)
+    await send_data_to_seeker(message)
+    await Form.stateEnd.set()
+    await bot.send_voice(message.chat.id, open(get_voice('017'), 'rb'),
+                         caption="Данные переданы! Ждите, с Вами свяжутся!",
+         reply_markup=types.ReplyKeyboardRemove())
 
 async def cmd_bring_parents(message: types.Message):
     if await check_reset(message): return
