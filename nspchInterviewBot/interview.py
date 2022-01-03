@@ -173,14 +173,6 @@ async def process_tiktok_code_q(message: types.Message, state: FSMContext):
 async def process_tiktok_code_q(message: types.Message, state: FSMContext):
     if await check_reset(message): return
     if message.text == Answers.yes_answ:
-        await Form.stateViewersQ.set()
-        markup = types.ReplyKeyboardMarkup(resize_keyboard=True, selective=True)
-        markup.add(Answers.yes_answ, Answers.no_answ, Answers.back_to_begin_answ)
-        await bot.send_voice(message.chat.id, open(get_voice('010'), 'rb'),
-                             caption="Делаете ли вы взаимные подписки для " +
-                             "взаимного увеличения подписчиков?",
-                             reply_markup=markup)
-    else:
         await Form.stateMutualSubscriptionsQ.set()
         markup = types.ReplyKeyboardMarkup(resize_keyboard=True, selective=True)
         markup.add(Answers.lt_10_answ, Answers.in_10_20_answ,
@@ -188,6 +180,14 @@ async def process_tiktok_code_q(message: types.Message, state: FSMContext):
                 Answers.back_to_begin_answ)
         await bot.send_voice(message.chat.id, open(get_voice('007'), 'rb'),
                              caption="Сколько зрителей вас смотрят (в среднем) ?",
+                             reply_markup=markup)
+    else:
+        await Form.stateViewersQ.set()
+        markup = types.ReplyKeyboardMarkup(resize_keyboard=True, selective=True)
+        markup.add(Answers.yes_answ, Answers.no_answ, Answers.back_to_begin_answ)
+        await bot.send_voice(message.chat.id, open(get_voice('010'), 'rb'),
+                             caption="Делаете ли вы взаимные подписки для " +
+                             "взаимного увеличения подписчиков?",
                              reply_markup=markup)
     async with state.proxy() as data:
         data['is_streamer'] = message.text
