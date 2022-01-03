@@ -439,13 +439,30 @@ async def process_expected_work_hours_q(message: types.Message):
         "сами!\nПоэтому каждый вносит единоразовый ПрофСоюзный взнос.",
         reply_markup=types.ReplyKeyboardRemove())
     await cmd_payment(message)
-    await select_nuncio(message)
-    await send_data_to_nuncio(message)
-    await send_data_to_seeker(message)
+    await cmd_select_nuncio(message)
+    await cmd_send_data_to_nuncio(message)
+    await cmd_send_data_to_seeker(message)
     await Form.stateEnd.set()
     await bot.send_voice(message.chat.id, open(get_voice('017'), 'rb'),
                          caption="Данные переданы! Ждите, с Вами свяжутся!",
          reply_markup=types.ReplyKeyboardRemove())
+
+# TODO: payment
+async def cmd_payment(message: types.Message):
+    await message.reply(italic("Оплата"), parse_mode=ParseMode.MARKDOWN)
+
+# TODO: select nuncio
+async def cmd_select_nuncio(message: types.Message):
+    await message.reply(italic("Выбор нунция"), parse_mode=ParseMode.MARKDOWN)
+
+# TODO: send data to nuncio
+async def cmd_send_data_to_nuncio(message: types.Message):
+    await message.reply(italic("Отправка данных нунцию"), parse_mode=ParseMode.MARKDOWN)
+
+# TODO: send data to seeker
+async def cmd_send_data_to_seeker(message: types.Message):
+    await message.reply(italic("Отправка данных соискателю"), parse_mode=ParseMode.MARKDOWN)
+
 
 async def cmd_bring_parents(message: types.Message):
     if await check_reset(message): return
