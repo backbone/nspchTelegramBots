@@ -150,7 +150,7 @@
         <dia:point val="16.3051,124.558"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="16.2551,124.508;38.9083,126.608"/>
+        <dia:rectangle val="16.2551,124.508;38.9082,126.608"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -272,7 +272,7 @@
         <dia:point val="19.741,167.495"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="15.554333881474289"/>
+        <dia:real val="15.554333881474291"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="6.7000000000000002"/>
@@ -304,7 +304,7 @@ IT, dev, журналистика,
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="27.5181,168.639"/>
+            <dia:point val="27.5182,168.639"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -394,7 +394,7 @@ IT, dev, журналистика,
         <dia:point val="9.86722,-10.6808"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="9.81722,-10.7308;18.1869,-6.22206"/>
+        <dia:rectangle val="9.81722,-10.7308;18.1869,-6.22203"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="9.86722,-10.6808"/>
@@ -430,7 +430,7 @@ IT, dev, журналистика,
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="14.0021,-8.68238"/>
+            <dia:point val="14.0021,-8.68235"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -575,7 +575,7 @@ IT, dev, журналистика,
         <dia:point val="20.1341,-3.20608"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="20.0841,-3.25608;34.4133,-1.15608"/>
+        <dia:rectangle val="20.0841,-3.25608;34.4132,-1.15608"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="20.1341,-3.20608"/>
@@ -620,13 +620,13 @@ IT, dev, журналистика,
     </dia:object>
     <dia:object type="Standard - Line" version="0" id="O13">
       <dia:attribute name="obj_pos">
-        <dia:point val="27.2756,-4.30803"/>
+        <dia:point val="27.2755,-4.30803"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="26.9082,-4.35866;27.6317,-3.1444"/>
+        <dia:rectangle val="26.9081,-4.35866;27.6317,-3.1444"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
-        <dia:point val="27.2756,-4.30803"/>
+        <dia:point val="27.2755,-4.30803"/>
         <dia:point val="27.2621,-3.2562"/>
       </dia:attribute>
       <dia:attribute name="numcp">
@@ -655,7 +655,7 @@ IT, dev, журналистика,
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
         <dia:point val="27.2695,-1.15637"/>
-        <dia:point val="27.2947,0.113572"/>
+        <dia:point val="27.2947,0.113571"/>
       </dia:attribute>
       <dia:attribute name="numcp">
         <dia:int val="1"/>
@@ -679,7 +679,7 @@ IT, dev, журналистика,
         <dia:point val="23.2037,0.122592"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="23.1537,0.0725922;31.5234,4.58137"/>
+        <dia:rectangle val="23.1537,0.072592;31.5234,4.58137"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="23.2037,0.122592"/>
@@ -952,7 +952,7 @@ IT, dev, журналистика,
         <dia:point val="17.7784,187.005"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="17.7284,186.955;37.2056,192.155"/>
+        <dia:rectangle val="17.7284,186.955;37.2055,192.155"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="17.7784,187.005"/>
@@ -1828,7 +1828,7 @@ VK, Instagram,
         <dia:point val="14.1812,68.2191"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="14.1312,68.1691;22.6207,69.9867"/>
+        <dia:rectangle val="14.1312,68.1691;22.6208,69.9867"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
         <dia:point val="14.1812,68.2191"/>
@@ -1936,7 +1936,7 @@ VK, Instagram,
         <dia:point val="21.8627,160.741"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="21.8127,160.691;33.5202,163.491"/>
+        <dia:rectangle val="21.8127,160.691;33.5203,163.491"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="21.8627,160.741"/>
@@ -1969,7 +1969,7 @@ VK, Instagram,
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="27.6664,161.885"/>
+            <dia:point val="27.6665,161.885"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -2217,7 +2217,7 @@ VK, Instagram,
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="27.4632,225.577"/>
+            <dia:point val="27.4631,225.577"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -2270,11 +2270,11 @@ VK, Instagram,
         <dia:point val="27.513,223.498"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="27.1377,223.446;27.8611,224.845"/>
+        <dia:rectangle val="27.1376,223.446;27.8611,224.845"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
         <dia:point val="27.513,223.498"/>
-        <dia:point val="27.4861,224.733"/>
+        <dia:point val="27.486,224.733"/>
       </dia:attribute>
       <dia:attribute name="numcp">
         <dia:int val="1"/>
@@ -2302,7 +2302,7 @@ VK, Instagram,
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
         <dia:point val="27.5038,226.832"/>
-        <dia:point val="27.5571,228.204"/>
+        <dia:point val="27.557,228.204"/>
       </dia:attribute>
       <dia:attribute name="numcp">
         <dia:int val="1"/>
@@ -2490,7 +2490,7 @@ VK, Instagram,
         <dia:point val="27.6131,156.141"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="27.2866,156.091;28.0102,160.805"/>
+        <dia:rectangle val="27.2867,156.091;28.0102,160.805"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
         <dia:point val="27.6131,156.141"/>
@@ -2515,14 +2515,14 @@ VK, Instagram,
     </dia:object>
     <dia:object type="Standard - Line" version="0" id="O60">
       <dia:attribute name="obj_pos">
-        <dia:point val="27.6427,163.491"/>
+        <dia:point val="27.6428,163.491"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="27.2243,163.441;27.9478,167.558"/>
+        <dia:rectangle val="27.2244,163.441;27.9479,167.558"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
-        <dia:point val="27.6427,163.491"/>
-        <dia:point val="27.5757,167.446"/>
+        <dia:point val="27.6428,163.491"/>
+        <dia:point val="27.5758,167.446"/>
       </dia:attribute>
       <dia:attribute name="numcp">
         <dia:int val="1"/>
@@ -2690,7 +2690,7 @@ VK, Instagram,
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="27.492,215.685"/>
+            <dia:point val="27.4921,215.685"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -2715,7 +2715,7 @@ VK, Instagram,
         <dia:point val="15.3209,178.224"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="15.2708,178.174;39.9183,180.974"/>
+        <dia:rectangle val="15.2709,178.174;39.9184,180.974"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="15.3209,178.224"/>
@@ -2745,7 +2745,7 @@ VK, Instagram,
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="27.5946,179.368"/>
+            <dia:point val="27.5947,179.368"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -2758,14 +2758,14 @@ VK, Instagram,
     </dia:object>
     <dia:object type="Standard - Line" version="0" id="O65">
       <dia:attribute name="obj_pos">
-        <dia:point val="27.5479,174.245"/>
+        <dia:point val="27.548,174.245"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
         <dia:rectangle val="27.2152,174.194;27.9388,178.287"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
-        <dia:point val="27.5479,174.245"/>
-        <dia:point val="27.5823,178.175"/>
+        <dia:point val="27.548,174.245"/>
+        <dia:point val="27.5824,178.175"/>
       </dia:attribute>
       <dia:attribute name="numcp">
         <dia:int val="1"/>
@@ -2820,7 +2820,7 @@ VK, Instagram,
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="27.5945,183.501"/>
+            <dia:point val="27.5946,183.501"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -2868,7 +2868,7 @@ VK, Instagram,
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
         <dia:point val="27.5524,185.907"/>
-        <dia:point val="27.5279,186.955"/>
+        <dia:point val="27.5278,186.955"/>
       </dia:attribute>
       <dia:attribute name="numcp">
         <dia:int val="1"/>
@@ -3184,14 +3184,14 @@ VK, Instagram,
     </dia:object>
     <dia:object type="Standard - Line" version="0" id="O75">
       <dia:attribute name="obj_pos">
-        <dia:point val="27.4678,213.404"/>
+        <dia:point val="27.4666,213.404"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="27.1109,213.353;27.8345,214.552"/>
+        <dia:rectangle val="27.11,213.353;27.8335,214.552"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
-        <dia:point val="27.4678,213.404"/>
-        <dia:point val="27.4798,214.441"/>
+        <dia:point val="27.4666,213.404"/>
+        <dia:point val="27.4792,214.441"/>
       </dia:attribute>
       <dia:attribute name="numcp">
         <dia:int val="1"/>
@@ -3219,7 +3219,7 @@ VK, Instagram,
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
         <dia:point val="27.4832,216.541"/>
-        <dia:point val="27.472,217.864"/>
+        <dia:point val="27.4721,217.864"/>
       </dia:attribute>
       <dia:attribute name="numcp">
         <dia:int val="1"/>
@@ -3240,16 +3240,16 @@ VK, Instagram,
     </dia:object>
     <dia:object type="Flowchart - Box" version="0" id="O77">
       <dia:attribute name="obj_pos">
-        <dia:point val="18.966,209.058"/>
+        <dia:point val="19.166,209.058"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="18.916,209.008;35.9685,213.408"/>
+        <dia:rectangle val="19.116,209.008;35.7635,213.408"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="18.966,209.058"/>
+        <dia:point val="19.166,209.058"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="16.952500000000001"/>
+        <dia:real val="16.547499999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.2999999999999998"/>
@@ -3264,7 +3264,7 @@ VK, Instagram,
         <dia:composite type="text">
           <dia:attribute name="string">
             <dia:string>#Напоминаю, у нас нет спонсоров!
-Мы, как Народовластие, всё организуем сами!
+Мы как Народовластие всё организуем сами!
 Поэтому каждый вносит единоразовый
 ПрофСоюзный взнос.#</dia:string>
           </dia:attribute>
@@ -3275,7 +3275,7 @@ VK, Instagram,
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="27.4423,210.202"/>
+            <dia:point val="27.4397,210.202"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -3288,14 +3288,14 @@ VK, Instagram,
     </dia:object>
     <dia:object type="Standard - Line" version="0" id="O78">
       <dia:attribute name="obj_pos">
-        <dia:point val="27.4423,205.774"/>
+        <dia:point val="27.4417,205.774"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="27.0805,205.724;27.8041,209.121"/>
+        <dia:rectangle val="27.0789,205.724;27.8025,209.121"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
-        <dia:point val="27.4423,205.774"/>
-        <dia:point val="27.4423,209.009"/>
+        <dia:point val="27.4417,205.774"/>
+        <dia:point val="27.4405,209.009"/>
       </dia:attribute>
       <dia:attribute name="numcp">
         <dia:int val="1"/>
@@ -3339,7 +3339,7 @@ VK, Instagram,
       <dia:attribute name="text">
         <dia:composite type="text">
           <dia:attribute name="string">
-            <dia:string>#Отлично, мы запускаем марафон 24/7стрим-трансляции,
+            <dia:string>#Отлично, мы запускаем марафон 24/7 стрим-трансляции,
 команда стримеров/модераторов передаёт актив по
 эстафете друг другу.#</dia:string>
           </dia:attribute>
@@ -3509,7 +3509,7 @@ VK, Instagram,
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="27.6528,79.8635"/>
+            <dia:point val="27.6528,79.8634"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -3525,11 +3525,11 @@ VK, Instagram,
         <dia:point val="27.6448,73.4236"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="27.2864,73.3735;28.01,77.1258"/>
+        <dia:rectangle val="27.2864,73.3735;28.01,77.1257"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
         <dia:point val="27.6448,73.4236"/>
-        <dia:point val="27.6489,77.014"/>
+        <dia:point val="27.6489,77.0139"/>
       </dia:attribute>
       <dia:attribute name="numcp">
         <dia:int val="1"/>
@@ -3670,7 +3670,7 @@ VK, Instagram,
         <dia:point val="15.0412,128.234"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="14.9911,128.184;40.2736,140.584"/>
+        <dia:rectangle val="14.9912,128.184;40.2737,140.584"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="15.0412,128.234"/>
@@ -3757,7 +3757,7 @@ VK, Instagram,
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="27.6349,146.27"/>
+            <dia:point val="27.6349,146.271"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -3836,13 +3836,13 @@ VK, Instagram,
     </dia:object>
     <dia:object type="Standard - Line" version="0" id="O92">
       <dia:attribute name="obj_pos">
-        <dia:point val="27.6337,140.578"/>
+        <dia:point val="27.6337,140.579"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="27.2725,140.528;27.9961,144.262"/>
+        <dia:rectangle val="27.2725,140.529;27.9961,144.262"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
-        <dia:point val="27.6337,140.578"/>
+        <dia:point val="27.6337,140.579"/>
         <dia:point val="27.6345,144.15"/>
       </dia:attribute>
       <dia:attribute name="numcp">
@@ -3895,7 +3895,7 @@ VK, Instagram,
         <dia:point val="23.3567,87.2876"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="23.3067,87.2376;32.0231,91.6457"/>
+        <dia:rectangle val="23.3067,87.2376;32.023,91.6458"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="23.3567,87.2876"/>
@@ -4006,7 +4006,7 @@ VK, Instagram,
         <dia:point val="19.1736,94.7778"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="19.1236,94.7278;36.3086,97.5278"/>
+        <dia:rectangle val="19.1236,94.7278;36.3087,97.5278"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="19.1736,94.7778"/>
@@ -4088,7 +4088,7 @@ VK, Instagram,
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="27.7947,105.141"/>
+            <dia:point val="27.7946,105.141"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -4158,7 +4158,7 @@ VK, Instagram,
         <dia:point val="11.0395,17.5365"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="10.9895,17.4865;17.249,20.6662"/>
+        <dia:rectangle val="10.9895,17.4865;17.2489,20.6662"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="11.0395,17.5365"/>
@@ -4187,7 +4187,7 @@ VK, Instagram,
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="14.1193,19.2704"/>
+            <dia:point val="14.1192,19.2704"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -4443,7 +4443,7 @@ VK, Instagram,
         <dia:point val="23.3048,151.833"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="23.2548,151.783;31.9712,156.192"/>
+        <dia:rectangle val="23.2548,151.783;31.9711,156.191"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="23.3048,151.833"/>
@@ -4472,7 +4472,7 @@ VK, Instagram,
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="27.613,154.182"/>
+            <dia:point val="27.613,154.181"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -4577,7 +4577,7 @@ VK, Instagram,
             <dia:string>#Участники младше 16 лет допускаются только
 с согласия родителей.
 Пожалуйста, приходите на собеседование с родителями!
-Благодарим за беседу. До встречи!#</dia:string>
+Благодарю за беседу. До встречи!#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="sans" style="0" name="Helvetica"/>
@@ -4693,7 +4693,7 @@ VK, Instagram,
         <dia:point val="27.6649,91.5951"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="27.3316,91.5445;28.0551,94.8397"/>
+        <dia:rectangle val="27.3316,91.5445;28.0552,94.8397"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
         <dia:point val="27.6649,91.5951"/>
@@ -4718,13 +4718,13 @@ VK, Instagram,
     </dia:object>
     <dia:object type="Standard - Line" version="0" id="O116">
       <dia:attribute name="obj_pos">
-        <dia:point val="27.738,97.527"/>
+        <dia:point val="27.7381,97.527"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="27.3918,97.4762;28.1154,99.2437"/>
+        <dia:rectangle val="27.3919,97.4762;28.1154,99.2437"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
-        <dia:point val="27.738,97.527"/>
+        <dia:point val="27.7381,97.527"/>
         <dia:point val="27.7632,99.1319"/>
       </dia:attribute>
       <dia:attribute name="numcp">
@@ -4746,14 +4746,14 @@ VK, Instagram,
     </dia:object>
     <dia:object type="Standard - Line" version="0" id="O117">
       <dia:attribute name="obj_pos">
-        <dia:point val="27.7925,102.731"/>
+        <dia:point val="27.7924,102.731"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
         <dia:rectangle val="27.431,102.681;28.1546,104.059"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
-        <dia:point val="27.7925,102.731"/>
-        <dia:point val="27.7932,103.947"/>
+        <dia:point val="27.7924,102.731"/>
+        <dia:point val="27.7931,103.947"/>
       </dia:attribute>
       <dia:attribute name="numcp">
         <dia:int val="1"/>
@@ -4833,7 +4833,7 @@ VK, Instagram,
         <dia:point val="23.5263,57.2948"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="23.4763,57.2448;28.6089,61.0748"/>
+        <dia:rectangle val="23.4763,57.2448;28.6088,61.0748"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -4905,7 +4905,7 @@ VK, Instagram,
         <dia:point val="12.1984,-18.4593"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="12.1484,-18.4593;15.9935,-16.2593"/>
+        <dia:rectangle val="12.1484,-18.4593;15.9934,-16.2593"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -5045,7 +5045,7 @@ VK, Instagram,
         <dia:point val="10.5931,6.19534"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="10.5431,6.19534;17.6407,8.39534"/>
+        <dia:rectangle val="10.5431,6.19534;17.6406,8.39534"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -5115,7 +5115,7 @@ VK, Instagram,
         <dia:point val="11.0839,21.1321"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="11.0339,21.1321;17.1665,23.3321"/>
+        <dia:rectangle val="11.0339,21.1321;17.1664,23.3321"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -5185,7 +5185,7 @@ VK, Instagram,
         <dia:point val="11.4017,29.313"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="11.3517,29.313;16.8518,31.513"/>
+        <dia:rectangle val="11.3517,29.313;16.8517,31.513"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -5230,7 +5230,7 @@ VK, Instagram,
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="14.1018,30.6071"/>
+            <dia:point val="14.1017,30.6071"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -5255,7 +5255,7 @@ VK, Instagram,
         <dia:point val="11.5729,37.5349"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="11.5228,37.5349;16.5579,39.7349"/>
+        <dia:rectangle val="11.5229,37.5349;16.5579,39.7349"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -5325,7 +5325,7 @@ VK, Instagram,
         <dia:point val="20.4209,33.793"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="20.3708,33.793;29.3884,35.993"/>
+        <dia:rectangle val="20.3709,33.793;29.3884,35.993"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -5370,7 +5370,7 @@ VK, Instagram,
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="24.8796,35.0871"/>
+            <dia:point val="24.8797,35.0871"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -5815,7 +5815,7 @@ VK, Instagram,
         <dia:point val="24.4074,141.026"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="24.3574,141.026;31.1675,143.226"/>
+        <dia:rectangle val="24.3574,141.026;31.1674,143.226"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -5860,7 +5860,7 @@ VK, Instagram,
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="27.7625,142.32"/>
+            <dia:point val="27.7624,142.32"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -5885,7 +5885,7 @@ VK, Instagram,
         <dia:point val="33.0531,55.1154"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="32.6657,55.0653;33.3893,69.9867"/>
+        <dia:rectangle val="32.6658,55.0653;33.3894,69.9867"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
         <dia:point val="33.0531,55.1154"/>
@@ -6100,7 +6100,7 @@ VK, Instagram,
         <dia:point val="24.7102,148.561"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="24.6602,148.561;30.6803,150.761"/>
+        <dia:rectangle val="24.6602,148.561;30.6802,150.761"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6145,7 +6145,7 @@ VK, Instagram,
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="27.6703,149.855"/>
+            <dia:point val="27.6702,149.855"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -6275,7 +6275,7 @@ VK, Instagram,
         <dia:point val="24.859,156.814"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="24.8089,156.814;30.5315,159.014"/>
+        <dia:rectangle val="24.809,156.814;30.5315,159.014"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6320,7 +6320,7 @@ VK, Instagram,
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="27.6702,158.108"/>
+            <dia:point val="27.6703,158.108"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -6345,7 +6345,7 @@ VK, Instagram,
         <dia:point val="24.8274,164.219"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="24.7774,164.219;30.58,166.419"/>
+        <dia:rectangle val="24.7774,164.219;30.5799,166.419"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6415,7 +6415,7 @@ VK, Instagram,
         <dia:point val="23.955,174.932"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="23.9049,174.932;31.435,177.132"/>
+        <dia:rectangle val="23.905,174.932;31.435,177.132"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6625,7 +6625,7 @@ VK, Instagram,
         <dia:point val="23.6718,205.82"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="23.6218,205.82;31.5319,208.02"/>
+        <dia:rectangle val="23.6218,205.82;31.5318,208.02"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6670,7 +6670,7 @@ VK, Instagram,
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="27.5769,207.114"/>
+            <dia:point val="27.5768,207.114"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -6759,6 +6759,76 @@ VK, Instagram,
         <dia:connection handle="0" to="O83" connection="4"/>
         <dia:connection handle="1" to="O107" connection="3"/>
       </dia:connections>
+    </dia:object>
+    <dia:object type="Flowchart - Punched Tape" version="1" id="O151">
+      <dia:attribute name="obj_pos">
+        <dia:point val="39.4813,122.38"/>
+      </dia:attribute>
+      <dia:attribute name="obj_bb">
+        <dia:rectangle val="39.4313,122.38;47.1988,124.58"/>
+      </dia:attribute>
+      <dia:attribute name="meta">
+        <dia:composite type="dict"/>
+      </dia:attribute>
+      <dia:attribute name="elem_corner">
+        <dia:point val="39.4813,122.38"/>
+      </dia:attribute>
+      <dia:attribute name="elem_width">
+        <dia:real val="7.6675000014901151"/>
+      </dia:attribute>
+      <dia:attribute name="elem_height">
+        <dia:real val="2.2000000000000002"/>
+      </dia:attribute>
+      <dia:attribute name="line_width">
+        <dia:real val="0.10000000149011612"/>
+      </dia:attribute>
+      <dia:attribute name="line_colour">
+        <dia:color val="#000000"/>
+      </dia:attribute>
+      <dia:attribute name="fill_colour">
+        <dia:color val="#f0e1ff"/>
+      </dia:attribute>
+      <dia:attribute name="show_background">
+        <dia:boolean val="true"/>
+      </dia:attribute>
+      <dia:attribute name="line_style">
+        <dia:enum val="0"/>
+        <dia:real val="1"/>
+      </dia:attribute>
+      <dia:attribute name="padding">
+        <dia:real val="0.10000000000000001"/>
+      </dia:attribute>
+      <dia:attribute name="text">
+        <dia:composite type="text">
+          <dia:attribute name="string">
+            <dia:string>#stateShowPresentation#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="font">
+            <dia:font family="sans" style="0" name="Helvetica"/>
+          </dia:attribute>
+          <dia:attribute name="height">
+            <dia:real val="0.80000000000000004"/>
+          </dia:attribute>
+          <dia:attribute name="pos">
+            <dia:point val="43.315,123.674"/>
+          </dia:attribute>
+          <dia:attribute name="color">
+            <dia:color val="#000000"/>
+          </dia:attribute>
+          <dia:attribute name="alignment">
+            <dia:enum val="1"/>
+          </dia:attribute>
+        </dia:composite>
+      </dia:attribute>
+      <dia:attribute name="flip_horizontal">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="flip_vertical">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="subscale">
+        <dia:real val="1"/>
+      </dia:attribute>
     </dia:object>
   </dia:layer>
 </dia:diagram>
