@@ -12,9 +12,6 @@ bot = Bot(BOT_TOKEN)
 dp = Dispatcher(bot)
 
 # Setup prices
-#prices = [
-#    types.LabeledPrice(label='ПрофСоюзный взнос 0,34% от З.П.', amount=1700),
-#]
 prices = [
     types.LabeledPrice(label='ПрофСоюзный взнос 0,34% от З.П.', amount=170000),
 ]
@@ -61,15 +58,16 @@ async def cmd_buy(message: types.Message):
                            photo_size=512,
                            is_flexible=False,  # True If you need to set up Shipping Fee
                            prices=prices,
-                           start_parameter='time-machine-example',
+                           start_parameter='union-fee',
                            payload='HAPPY FRIDAYS COUPON')
 
 @dp.pre_checkout_query_handler(lambda query: True)
 async def checkout(pre_checkout_query: types.PreCheckoutQuery):
     await bot.answer_pre_checkout_query(pre_checkout_query.id, ok=True,
-                                        error_message="Aliens tried to steal your card's CVV,"
-                                                      " but we successfully protected your credentials,"
-                                                      " try to pay again in a few minutes, we need a small rest.")
+                                        error_message="Чужаки пытались украсть CVV-код вашей карты,"
+                                                      " но мы успешно предотвратили атаку,"
+                                                      " попробуйте оплатить взнос спустя несколько минут,"
+                                                      " нам нужен небольшой отдых.")
 
 
 @dp.message_handler(content_types=ContentTypes.SUCCESSFUL_PAYMENT)
