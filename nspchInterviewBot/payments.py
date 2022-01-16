@@ -26,17 +26,19 @@ async def cmd_start(message: types.Message):
 @dp.message_handler(commands=['terms'])
 async def cmd_terms(message: types.Message):
     await bot.send_message(message.chat.id,
-                           'Thank you for shopping with our demo bot. We hope you like your new time machine!\n'
-                           '1. If your time machine was not delivered on time, please rethink your concept of time'
-                           ' and try again.\n'
-                           '2. If you find that your time machine is not working, kindly contact our future service'
-                           ' workshops on Trappist-1e. They will be accessible anywhere between'
-                           ' May 2075 and November 4000 C.E.\n'
-                           '3. If you would like a refund, kindly apply for one yesterday and we will have sent it'
-                           ' to you immediately.')
+                           'Благодарим за участие в нашей команде:\n'
+                           '1. ПрофСоюзный взнос является единоразовым. По окончании'
+                           ' испытательного срока заключается договор найма.\n'
+                           '2. Испытательный срок длится 2 (две) недели. В течение'
+                           ' этого времени от вас ожидается полная выкладка и'
+                           ' участие.\n'
+                           '3. Успешным завершением испытательного срока'
+                           ' считается выполнение следующих условий:\n'
+                           '  а) действие по алгоритму (учреждение одного TikTok-аккаунта / сут. и т.п.);\n'
+                           '  б) круговая порука 12+1;\n'
+                           '  в) отсутствие правонарушений в области уголовного права;\n'
+                           '  г) исполнение 29.1 ВДПЧ.\n')
 
-
-# 1.
 @dp.message_handler(commands=['buy'])
 async def cmd_buy(message: types.Message):
     await bot.send_message(message.chat.id,
