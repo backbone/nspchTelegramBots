@@ -12,10 +12,13 @@ bot = Bot(BOT_TOKEN)
 dp = Dispatcher(bot)
 
 # Setup prices
+#prices = [
+#    types.LabeledPrice(label='ПрофСоюзный взнос 0,34% от З.П.', amount=1700),
+#]
 prices = [
-    types.LabeledPrice(label='Working Time Machine', amount=5750),
-    types.LabeledPrice(label='Gift wrapping', amount=500),
+    types.LabeledPrice(label='ПрофСоюзный взнос 0,34% от З.П.', amount=170000),
 ]
+
 
 # Setup shipping options
 shipping_options = [
@@ -27,9 +30,8 @@ shipping_options = [
 @dp.message_handler(commands=['start'])
 async def cmd_start(message: types.Message):
     await bot.send_message(message.chat.id,
-                           "Hello, I'm the demo merchant bot."
-                           " I can sell you a Time Machine."
-                           " Use /buy to order one, /terms for Terms and Conditions")
+                           " Используйте команду /buy для оплаты ПрофСоюзного взноса, "
+                           " команду /terms для ознакомления с условиями и положениями.")
 
 
 @dp.message_handler(commands=['terms'])
@@ -45,24 +47,27 @@ async def cmd_terms(message: types.Message):
                            ' to you immediately.')
 
 
+# 1.
 @dp.message_handler(commands=['buy'])
 async def cmd_buy(message: types.Message):
     await bot.send_message(message.chat.id,
-                           "Real cards won't work with me, no money will be debited from your account."
-                           " Use this test card number to pay for your Time Machine: `4242 4242 4242 4242`"
-                           "\n\nThis is your demo invoice:", parse_mode='Markdown')
-    await bot.send_invoice(message.chat.id, title='Working Time Machine',
-                           description='Want to visit your great-great-great-grandparents?'
-                                       ' Make a fortune at the races?'
-                                       ' Shake hands with Hammurabi and take a stroll in the Hanging Gardens?'
-                                       ' Order our Working Time Machine today!',
+                           'Оплатите ПрофСоюзный взнос 0,34% от З.П. = 1700 ббр '
+                           'и получите готовые инструменты для заработка в '
+                           'Internet, обучение, правовую и техническую поддержку! '
+                           'Вступите и участвуйте вместе с нами! '
+                           'Тестовая карта: `4242 4242 4242 4242`:', parse_mode='Markdown')
+    await bot.send_invoice(message.chat.id, title="ПрофСоюзный взнос 0,34% от З.П.",
+                           description="Это стоимость всех наших инструментов "
+                           'для заработка, включая обучение правозащите, '
+                           'журналистике, видео-монтажу, IT, дикторские '
+                           'навыки.',
                            provider_token=PAYMENTS_PROVIDER_TOKEN,
                            currency='rub',
                            photo_url='https://telegra.ph/file/d08ff863531f10bf2ea4b.jpg',
                            photo_height=512,  # !=0/None or picture won't be shown
                            photo_width=512,
                            photo_size=512,
-                           is_flexible=True,  # True If you need to set up Shipping Fee
+                           is_flexible=False,  # True If you need to set up Shipping Fee
                            prices=prices,
                            start_parameter='time-machine-example',
                            payload='HAPPY FRIDAYS COUPON')
@@ -86,10 +91,10 @@ async def checkout(pre_checkout_query: types.PreCheckoutQuery):
 @dp.message_handler(content_types=ContentTypes.SUCCESSFUL_PAYMENT)
 async def got_payment(message: types.Message):
     await bot.send_message(message.chat.id,
-                           'Hoooooray! Thanks for payment! We will proceed your order for `{} {}`'
-                           ' as fast as possible! Stay in touch.'
-                           '\n\nUse /buy again to get a Time Machine for your friend!'.format(
-                               message.successful_payment.total_amount / 100, message.successful_payment.currency),
+                           'Отлично! Благодарю за оплату, `{} {}`'
+                           'Вы будете перенаправлены на нашего координатора,'
+                           'который даст полную информацию и ответит на'
+                           'ваши вопросы.',
                            parse_mode='Markdown')
 
 
