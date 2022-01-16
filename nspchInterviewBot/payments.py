@@ -54,7 +54,7 @@ async def cmd_buy(message: types.Message):
                            'навыки.',
                            provider_token=PAYMENTS_PROVIDER_TOKEN,
                            currency='rub',
-                           photo_url='https://telegra.ph/file/d08ff863531f10bf2ea4b.jpg',
+                           photo_url='https://telegra.ph//file/a5d8b0d80d93a2875a781.jpg',
                            photo_height=512,  # !=0/None or picture won't be shown
                            photo_width=512,
                            photo_size=512,
