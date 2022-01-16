@@ -61,7 +61,7 @@ async def cmd_buy(message: types.Message):
                            is_flexible=False,  # True If you need to set up Shipping Fee
                            prices=prices,
                            start_parameter='union-fee',
-                           payload='HAPPY FRIDAYS COUPON')
+                           payload='Заработок, правозащита, успех')
 
 @dp.pre_checkout_query_handler(lambda query: True)
 async def checkout(pre_checkout_query: types.PreCheckoutQuery):
