@@ -19,14 +19,6 @@ prices = [
     types.LabeledPrice(label='ПрофСоюзный взнос 0,34% от З.П.', amount=170000),
 ]
 
-
-# Setup shipping options
-shipping_options = [
-    types.ShippingOption(id='instant', title='WorldWide Teleporter').add(types.LabeledPrice('Teleporter', 1000)),
-    types.ShippingOption(id='pickup', title='Local pickup').add(types.LabeledPrice('Pickup', 300)),
-]
-
-
 @dp.message_handler(commands=['start'])
 async def cmd_start(message: types.Message):
     await bot.send_message(message.chat.id,
@@ -71,14 +63,6 @@ async def cmd_buy(message: types.Message):
                            prices=prices,
                            start_parameter='time-machine-example',
                            payload='HAPPY FRIDAYS COUPON')
-
-
-@dp.shipping_query_handler(lambda query: True)
-async def shipping(shipping_query: types.ShippingQuery):
-    await bot.answer_shipping_query(shipping_query.id, ok=True, shipping_options=shipping_options,
-                                    error_message='Oh, seems like our Dog couriers are having a lunch right now.'
-                                                  ' Try again later!')
-
 
 @dp.pre_checkout_query_handler(lambda query: True)
 async def checkout(pre_checkout_query: types.PreCheckoutQuery):
