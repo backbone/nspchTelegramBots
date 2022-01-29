@@ -10,8 +10,8 @@ from aiogram.types import ParseMode
 from aiogram.utils import executor
 import random, datetime
 from aiogram.utils.markdown import bold, code, italic, text
-import API_TOKEN from custom/config.example.py
-import API_TOKEN from custom/config.py
+from custom.config_example import API_TOKEN
+from custom.config import API_TOKEN
 
 logging.basicConfig(level=logging.INFO)
 
