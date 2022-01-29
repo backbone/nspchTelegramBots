@@ -6,8 +6,8 @@ It echoes any incoming text messages.
 import logging
 
 from aiogram import Bot, Dispatcher, executor, types
-
-API_TOKEN = ''
+import API_TOKEN from custom/config.example.py
+import API_TOKEN from custom/config.py
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)

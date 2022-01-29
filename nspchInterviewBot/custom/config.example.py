@@ -1,1 +1,1 @@
-token_api = 'your token bot API'
+API_TOKEN = 'your token bot API'
