@@ -306,6 +306,7 @@ async def process_tiktok_screenshot_q(message: types.Message, state: FSMContext)
          reply_markup=types.ReplyKeyboardRemove())
     await cmd_send_tiktok_data(message)
     await Form.stateEnd.set()
+    # TODO: ЗДЕСЬ МОГ БЫ БЫТЬ ВАШ КОММИТ
     await bot.send_voice(message.chat.id, open(get_voice('017'), 'rb'),
                          caption="Данные переданы! Ждите, с Вами свяжутся!",
          reply_markup=types.ReplyKeyboardRemove())
@@ -442,6 +443,7 @@ async def process_expected_work_hours_q(message: types.Message, state: FSMContex
     await cmd_send_data_to_nuncio(message)
     await cmd_send_data_to_seeker(message)
     await Form.stateEnd.set()
+    # TODO: МЕСТО ДЛЯ ВАШЕГО КОММИТА
     await bot.send_voice(message.chat.id, open(get_voice('017'), 'rb'),
                          caption="Данные переданы! Ждите, с Вами свяжутся!",
          reply_markup=types.ReplyKeyboardRemove())
