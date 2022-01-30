@@ -10,6 +10,7 @@ from aiogram.types import ParseMode
 from aiogram.utils import executor
 import random, datetime
 from aiogram.utils.markdown import bold, code, italic, text
+from aiogram.types.message import ContentTypes
 from custom.config_example import API_TOKEN
 from custom.config import API_TOKEN
 
@@ -447,6 +448,48 @@ async def process_expected_work_hours_q(message: types.Message, state: FSMContex
     await bot.send_voice(message.chat.id, open(get_voice('017'), 'rb'),
                          caption="Данные переданы! Ждите, с Вами свяжутся!",
          reply_markup=types.ReplyKeyboardRemove())
+
+@dp.message_handler(commands=['buy'])
+async def cmd_buy(message: types.Message):
+    await bot.send_message(message.chat.id,
+                           'Оплатите ПрофСоюзный взнос 0,34% от З.П. = 1700 ббр '
+                           'и получите готовые инструменты для заработка в '
+                           'Internet, обучение, правовую и техническую поддержку! '
+                           'Вступите и участвуйте вместе с нами! '
+                           'Тестовая карта: `4242 4242 4242 4242`:', parse_mode='Markdown')
+    await bot.send_invoice(message.chat.id, title="ПрофСоюзный взнос 0,34% от З.П.",
+                           description="Это стоимость всех наших инструментов "
+                           'для заработка, включая обучение правозащите, '
+                           'журналистике, видео-монтажу, IT, дикторские '
+                           'навыки.',
+                           provider_token=PAYMENTS_PROVIDER_TOKEN,
+                           currency='rub',
+                           photo_url='https://telegra.ph//file/a5d8b0d80d93a2875a781.jpg',
+                           photo_height=512,  # !=0/None or picture won't be shown
+                           photo_width=512,
+                           photo_size=512,
+                           is_flexible=False,  # True If you need to set up Shipping Fee
+                           prices=prices,
+                           start_parameter='union-fee',
+                           payload='Заработок, правозащита, успех')
+
+@dp.pre_checkout_query_handler(lambda query: True)
+async def checkout(pre_checkout_query: types.PreCheckoutQuery):
+    await bot.answer_pre_checkout_query(pre_checkout_query.id, ok=True,
+                                        error_message="Чужаки пытались украсть CVV-код вашей карты,"
+                                                      " но мы успешно предотвратили атаку,"
+                                                      " попробуйте оплатить взнос спустя несколько минут,"
+                                                      " нам нужен небольшой отдых.")
+
+
+@dp.message_handler(content_types=ContentTypes.SUCCESSFUL_PAYMENT)
+async def got_payment(message: types.Message):
+    await bot.send_message(message.chat.id,
+                           'Отлично! Благодарю за оплату, `{} {}`'
+                           'Вы будете перенаправлены на нашего координатора,'
+                           'который даст полную информацию и ответит на'
+                           'ваши вопросы.',
+                           parse_mode='Markdown')
 
 # TODO: payment
 async def cmd_payment(message: types.Message):
