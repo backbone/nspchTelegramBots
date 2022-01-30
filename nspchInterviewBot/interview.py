@@ -472,6 +472,10 @@ async def got_payment(message: types.Message):
                            'который даст полную информацию и ответит на'
                            'ваши вопросы.',
                            parse_mode='Markdown')
+    await cmd_select_nuncio(message)
+    await cmd_send_data_to_nuncio(message)
+    await cmd_send_data_to_seeker(message)
+    await Form.stateEnd.set()
 
 @dp.message_handler(state=Form.stateExpectedWorkHoursQ)
 async def process_expected_work_hours_q(message: types.Message, state: FSMContext):
@@ -486,14 +490,6 @@ async def process_expected_work_hours_q(message: types.Message, state: FSMContex
         "сами!\nПоэтому каждый вносит единоразовый ПрофСоюзный взнос.",
         reply_markup=types.ReplyKeyboardRemove())
     await cmd_pay(message)
-    await cmd_select_nuncio(message)
-    await cmd_send_data_to_nuncio(message)
-    await cmd_send_data_to_seeker(message)
-    await Form.stateEnd.set()
-    # TODO: МЕСТО ДЛЯ ВАШЕГО КОММИТА
-    await bot.send_voice(message.chat.id, open(get_voice('017'), 'rb'),
-                         caption="Данные переданы! Ждите, с Вами свяжутся!",
-         reply_markup=types.ReplyKeyboardRemove())
 
 # TODO: select nuncio
 async def cmd_select_nuncio(message: types.Message):
