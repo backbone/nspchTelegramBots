@@ -3,13 +3,15 @@ from aiogram import types
 from aiogram.dispatcher import Dispatcher
 from aiogram.types.message import ContentTypes
 from aiogram.utils import executor
+from custom.config_example import PAYMENTS_PROVIDER_TOKEN
+from custom.config import PAYMENTS_PROVIDER_TOKEN
 
 
-BOT_TOKEN = ''
-PAYMENTS_PROVIDER_TOKEN = ''
+#BOT_TOKEN = ''
+#PAYMENTS_PROVIDER_TOKEN = ''
 
-bot = Bot(BOT_TOKEN)
-dp = Dispatcher(bot)
+#bot = Bot(BOT_TOKEN)
+#dp = Dispatcher(bot)
 
 # Setup prices
 prices = [
