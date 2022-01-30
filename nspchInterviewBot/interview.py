@@ -11,8 +11,8 @@ from aiogram.utils import executor
 import random, datetime
 from aiogram.utils.markdown import bold, code, italic, text
 from aiogram.types.message import ContentTypes
-from custom.config_example import API_TOKEN
-from custom.config import API_TOKEN
+from custom.config_example import API_TOKEN, PAYMENTS_PROVIDER_TOKEN
+from custom.config import API_TOKEN, PAYMENTS_PROVIDER_TOKEN
 
 logging.basicConfig(level=logging.INFO)
 
@@ -21,6 +21,11 @@ bot = Bot(token=API_TOKEN)
 # For example use simple MemoryStorage for Dispatcher.
 storage = MemoryStorage()
 dp = Dispatcher(bot, storage=storage)
+
+# Setup prices
+prices = [
+            types.LabeledPrice(label='ПрофСоюзный взнос 0,34% от З.П.', amount=170000),
+]
 
 # States
 class Form(StatesGroup):
@@ -427,30 +432,8 @@ async def process_expected_salary_q(message: types.Message, state: FSMContext):
         caption="Сколько часов в день инвестируя, вы хотели бы у Нас трудиться..???",
         reply_markup=markup)
 
-@dp.message_handler(state=Form.stateExpectedWorkHoursQ)
-async def process_expected_work_hours_q(message: types.Message, state: FSMContext):
-    if await check_reset(message): return
-    await Form.stateIURSSContribution.set()
-    async with state.proxy() as data:
-        data['working_hours'] = message.text
-    await bot.send_voice(message.chat.id, open(get_voice('023'), 'rb'),
-        caption="Отлично..!!!\nИспытательный срок у нас 2 недели.\n" +
-        "ВЫ ПОЛУЧАЕТЕ 9,35€ в час с условием, что трудитесь на совесть.\n" +
-        "Напоминаю, у нас нет спонсоров! Мы как Народовластие всё организуем " +
-        "сами!\nПоэтому каждый вносит единоразовый ПрофСоюзный взнос.",
-        reply_markup=types.ReplyKeyboardRemove())
-    await cmd_payment(message)
-    await cmd_select_nuncio(message)
-    await cmd_send_data_to_nuncio(message)
-    await cmd_send_data_to_seeker(message)
-    await Form.stateEnd.set()
-    # TODO: МЕСТО ДЛЯ ВАШЕГО КОММИТА
-    await bot.send_voice(message.chat.id, open(get_voice('017'), 'rb'),
-                         caption="Данные переданы! Ждите, с Вами свяжутся!",
-         reply_markup=types.ReplyKeyboardRemove())
-
 @dp.message_handler(commands=['buy'])
-async def cmd_buy(message: types.Message):
+async def cmd_pay(message: types.Message):
     await bot.send_message(message.chat.id,
                            'Оплатите ПрофСоюзный взнос 0,34% от З.П. = 1700 ббр '
                            'и получите готовые инструменты для заработка в '
@@ -481,7 +464,6 @@ async def checkout(pre_checkout_query: types.PreCheckoutQuery):
                                                       " попробуйте оплатить взнос спустя несколько минут,"
                                                       " нам нужен небольшой отдых.")
 
-
 @dp.message_handler(content_types=ContentTypes.SUCCESSFUL_PAYMENT)
 async def got_payment(message: types.Message):
     await bot.send_message(message.chat.id,
@@ -491,9 +473,27 @@ async def got_payment(message: types.Message):
                            'ваши вопросы.',
                            parse_mode='Markdown')
 
-# TODO: payment
-async def cmd_payment(message: types.Message):
-    await message.reply(italic("Оплата"), parse_mode=ParseMode.MARKDOWN)
+@dp.message_handler(state=Form.stateExpectedWorkHoursQ)
+async def process_expected_work_hours_q(message: types.Message, state: FSMContext):
+    if await check_reset(message): return
+    await Form.stateIURSSContribution.set()
+    async with state.proxy() as data:
+        data['working_hours'] = message.text
+    await bot.send_voice(message.chat.id, open(get_voice('023'), 'rb'),
+        caption="Отлично..!!!\nИспытательный срок у нас 2 недели.\n" +
+        "ВЫ ПОЛУЧАЕТЕ 9,35€ в час с условием, что трудитесь на совесть.\n" +
+        "Напоминаю, у нас нет спонсоров! Мы как Народовластие всё организуем " +
+        "сами!\nПоэтому каждый вносит единоразовый ПрофСоюзный взнос.",
+        reply_markup=types.ReplyKeyboardRemove())
+    await cmd_pay(message)
+    await cmd_select_nuncio(message)
+    await cmd_send_data_to_nuncio(message)
+    await cmd_send_data_to_seeker(message)
+    await Form.stateEnd.set()
+    # TODO: МЕСТО ДЛЯ ВАШЕГО КОММИТА
+    await bot.send_voice(message.chat.id, open(get_voice('017'), 'rb'),
+                         caption="Данные переданы! Ждите, с Вами свяжутся!",
+         reply_markup=types.ReplyKeyboardRemove())
 
 # TODO: select nuncio
 async def cmd_select_nuncio(message: types.Message):
