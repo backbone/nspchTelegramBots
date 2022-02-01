@@ -11,8 +11,8 @@ from aiogram.utils import executor
 import random, datetime
 from aiogram.utils.markdown import bold, code, italic, text
 from aiogram.types.message import ContentTypes
-from custom.config_example import API_TOKEN, PAYMENTS_PROVIDER_TOKEN
-from custom.config import API_TOKEN, PAYMENTS_PROVIDER_TOKEN
+from custom.config_example import *
+from custom.config import *
 
 logging.basicConfig(level=logging.INFO)
 
