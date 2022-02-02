@@ -1,3 +1,9 @@
 [submodule "nspchInterviewBot/data"]
 	path = nspchInterviewBot/data
 	url = git@git.backbone.ws:NSPCH/nspchInterviewBot-data.git
+[submodule "nspchSecurityBot/data"]
+	path = nspchSecurityBot/data
+	url = git@git.backbone.ws:NSPCH/nspchSecurityBot-data.git
+[submodule "nspchFaqBot/data"]
+	path = nspchFaqBot/data
+	url = git@git.backbone.ws:NSPCH/nspchFaqBot-data.git
