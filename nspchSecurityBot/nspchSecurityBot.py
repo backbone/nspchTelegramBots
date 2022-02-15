@@ -1,11 +1,9 @@
-"""
-This is a echo bot.
-It echoes any incoming text messages.
-"""
+#!/usr/bin/env python3
 
 import logging
 import asyncio
 from datetime import datetime
+from pathlib import Path
 
 from aiogram import Bot, Dispatcher, executor, types
 from custom.config_example import *
@@ -67,7 +65,6 @@ async def show_interview(sleep_for, queue):
     keyboard.add(button)
     while True:
         await asyncio.sleep(sleep_for)
-        now = datetime.utcnow()
         for id in chat_ids:
             with open('data/Interview-1.webp', 'rb') as photo:
                 '''
@@ -81,8 +78,14 @@ async def show_interview(sleep_for, queue):
                 '''
                 await bot.send_photo(id, photo, caption='', reply_markup=keyboard, disable_notification=True)
 
+async def watchdog(sleep_for, queue):
+    while True:
+        Path(WATCHDOG_FILE).touch()
+        await asyncio.sleep(sleep_for)
+
 if __name__ == '__main__':
     loop = asyncio.get_event_loop()
     queue = asyncio.Queue()
-    loop.create_task(show_interview(POST_TIMEOUT, queue))
+    loop.create_task(show_interview(POST_INTERVAL, queue))
+    loop.create_task(watchdog(WATCHDOG_INTERVAL, queue))
     executor.start_polling(dp, skip_updates=True)

@@ -1,4 +1,7 @@
+#!/usr/bin/env python3
+
 import logging
+import asyncio
 
 import aiogram.utils.markdown as md
 from aiogram import Bot, Dispatcher, types
@@ -9,6 +12,7 @@ from aiogram.dispatcher.filters.state import State, StatesGroup
 from aiogram.types import ParseMode
 from aiogram.utils import executor
 import random, datetime
+from pathlib import Path
 from aiogram.utils.markdown import bold, code, italic, text
 from aiogram.types.message import ContentTypes
 from custom.config_example import *
@@ -520,10 +524,17 @@ async def cmd_good_luck_end(message: types.Message):
                          caption="В С Е Г О   Х О Р О Ш Е Г О !!!",
                          reply_markup=types.ReplyKeyboardRemove())
    
+async def watchdog(sleep_for, queue):
+    while True:
+        Path(WATCHDOG_FILE).touch()
+        await asyncio.sleep(sleep_for)
 #------------------------------------------------------------------------------
 #------------------------------------------------------------------------------
 #------------------------------------------------------------------------------
 if __name__ == '__main__':
+    loop = asyncio.get_event_loop()
+    queue = asyncio.Queue()
+    loop.create_task(watchdog(WATCHDOG_INTERVAL, queue))
     executor.start_polling(dp, skip_updates=True)
 
 #==============================================================================

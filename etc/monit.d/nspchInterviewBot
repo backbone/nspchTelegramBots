@@ -1,0 +1,9 @@
+check file nspchInterviewBot.timestamp with path /var/run/nspch/nspchInterviewBot.timestamp
+    start program = "/sbin/rc-service nspchInterviewBot restart"
+    stop program = "/sbin/rc-service nspchInterviewBot stop"
+    if atime > 30 seconds then restart
+
+check process nspchInterviewBot with pidfile /var/run/nspch/nspchInterviewBot.pid
+    start program = "/sbin/rc-service nspchInterviewBot restart"
+    stop program = "/sbin/rc-service nspchInterviewBot stop"
+    if totalmem > 128 MB then alert

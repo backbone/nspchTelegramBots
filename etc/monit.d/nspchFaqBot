@@ -1,0 +1,9 @@
+#check file nspchFaqBot.timestamp with path /var/run/nspch/nspchFaqBot.timestamp
+#    start program = "/sbin/rc-service nspchFaqBot restart"
+#    stop program = "/sbin/rc-service nspchFaqBot stop"
+#    if atime > 30 seconds then restart
+#
+#check process nspchFaqBot with pidfile /var/run/nspch/nspchFaqBot.pid
+#    start program = "/sbin/rc-service nspchFaqBot restart"
+#    stop program = "/sbin/rc-service nspchFaqBot stop"
+#    if totalmem > 128 MB then alert

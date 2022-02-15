@@ -1,0 +1,9 @@
+check file nspchSecurityBot.timestamp with path /var/run/nspch/nspchSecurityBot.timestamp
+    start program = "/sbin/rc-service nspchSecurityBot restart"
+    stop program = "/sbin/rc-service nspchSecurityBot stop"
+    if atime > 30 seconds then restart
+
+check process nspchSecurityBot with pidfile /var/run/nspch/nspchSecurityBot.pid
+    start program = "/sbin/rc-service nspchSecurityBot restart"
+    stop program = "/sbin/rc-service nspchSecurityBot stop"
+    if totalmem > 128 MB then alert

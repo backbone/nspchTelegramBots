@@ -1,0 +1,7 @@
+TBOT_VENV="/var/srv/tbot/bots-venv/bin/activate"
+TBOT_DIR="/var/srv/tbot/nspchTelegramBots"
+TBOT_NAME=nspchInterviewBot
+TBOT_PIDS="/var/run/nspch"
+TBOT_USER="tbot"
+TBOT_GROUP="tbot"
+TBOT_ARGS=""
